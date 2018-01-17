@@ -1,0 +1,95 @@
+@import "base/variables";
+@import "base/mixins";
+@import "base/base";
+@import "components/header";
+@import "components/footer";
+@import "components/weirdo";
+
+
+body {
+  margin: 0 0 0 0;
+  padding:0 0 0 0;
+  font-size:16px;
+  color:#515661;
+}
+
+.container {
+  margin-top:30px;
+}
+
+#map {
+   max-width: 900px;
+   height: 600px;
+ }
+
+ul {
+  color:red;
+  font-weight: 600;
+  font-size: 1.2em;
+  list-style-type: none;
+  margin: 20px 0 10px 0!important;
+  //margin-bottom: 10px;
+  padding: 0!important;
+}
+
+li {
+  list-style: none;
+}
+
+.fa .fa-square {
+  color: #515661;
+}
+
+li:active, li:focus {
+  font-weight: 600;
+  outline:none;
+}
+
+li i {
+  margin-right: 5px;
+}
+
+li:active i, li:focus i {
+  color: red;
+}
+
+
+
+table {
+  margin-top:40px;
+}
+
+
+
+//.d3-tip {
+//  line-height: 1.3;
+//  font-weight: normal;
+//  padding: 6px;
+//  background: rgba(0, 0, 0, 0.8);
+//  color: #fff;
+//  border-radius: 2px;
+//  width: 350px;
+//}
+//
+///* Creates a small triangle extender for the tooltip */
+//.d3-tip:after {
+//  box-sizing: border-box;
+//  display: inline;
+//  font-size: 6px;
+//  width: 100%;
+//  line-height: 1;
+//  color: rgba(0, 0, 0, 0.8);
+//  content: "\25BC";
+//  position: absolute;
+//  text-align: center;
+//}
+//
+///* Style northward tooltips differently */
+//.d3-tip.n:after {
+//  margin: -1px 0 0 0;
+//  top: 100%;
+//  left: 0;
+//}
+
+
+
