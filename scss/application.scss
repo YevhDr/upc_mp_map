@@ -40,16 +40,16 @@ li {
   color: #515661;
 }
 
-li:active, li:focus {
+text:active, text:focus {
   font-weight: 600;
   outline:none;
 }
 
-li i {
+text i {
   margin-right: 5px;
 }
 
-li:active i, li:focus i {
+text:active i, text:focus i {
   color: red;
 }
 
@@ -91,5 +91,14 @@ table {
 //  left: 0;
 //}
 
+#legend {
+  overflow: visible;
+}
 
+.legend {
+  font-size:1rem;
+}
 
+.flex-cont {
+  display:flex;
+}

@@ -69,41 +69,164 @@ L.mask(latLngs).addTo(map);
 
 d3.json("data/bosses_latlon.json", function(data) {
 
-    var category20b = d3.scale.category20();
+   var category20b = d3.scale.linear()
+       .range(['red','green']);
     var cities = L.layerGroup();
+
+
 
     data.forEach(function(d, i) {
 
-
-
-
-
         d.orgs.forEach(function(k,j) {
-
-
 
             k.lat = +k.lat;
             k.lon = +k.lon;
 
-        L.circle([k.lat, k.lon], {
+      L.circle([k.lat, k.lon], {
             color: 'none',
-            fillColor: category20b(k.section),
-            fillOpacity: 0.6,
+            fillColor: category20b(k.religious),
+            fillOpacity: 0.4,
             radius: 5000,
-            className: 'point'
+            className: 'point' + " " + k.section
+
+
         }).addTo(cities).bindPopup(k.NAME);
+
+
 
         map.addLayer(cities);
 
-    })
+
+
+
+
+        });
+
+        coordinates = [];
+        sh = [];
+        for (i = 0; i < d.orgs.length;) {
+            sh.push([d.orgs[i].lat, d.orgs[i].lon]);
+            i++;
+
+        }
+        coordinates.push(sh);
+
+        var polyline = L.polyline(coordinates,
+            {
+                color: 'grey',
+                fillOpacity: 0.3,
+                weight: 0.5
+
+            }).addTo(cities);
+
+
+
+        map.addLayer(cities);
 
     });
 
-    d3.selectAll(".point").style("fill", color)
 
 
 
+    var cs = [];
+    data.forEach(function (d,i) {
+        d.orgs.forEach(function (k,j) {
+        if(!cs.contains(k.section)) {
+            cs.push(k.section);
+        }
+    })
+    });
+
+
+    var n = data.length, // total number of nodes
+        m = cs.length,
+        margin = 30,
+        width = 300,
+        height = 500;// number of distinct clusters
+
+//create clusters and nodes
+
+    var svg_a = d3.select("#legend")
+        .append("svg")
+        .attr("width", width)
+        .attr("height",height)
+        .attr("class", "flex-cont");
+
+
+    var legendTable = svg_a.append("g")
+        .attr("transform", "translate(0, "+margin+")")
+        .attr("class", "legendTable");
+
+    var legend = legendTable.selectAll(".legend")
+        .data(cs)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) {
+            return "translate(0, " + i * 20 + ")";
+        });
+
+    // legend.append("rect")
+    //     .attr("x", width - 10)
+    //     .attr("y", 4)
+    //     .attr("width", 10)
+    //     .attr("height", 10)
+    //     .style("fill", function(d) {
+    //         return category20b(d); });
+
+    legend.append("text")
+        .attr("x", width - 14)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) {
+            return d ; })
+        .attr("class", "legend")
+        .attr("tabindex", "1");
+
+
+
+
+
+
+
+
+
+    // .data(data.filter(function(d){return d.category == category;}))
+
+
+        $(".legend").on("click", function () {
+        var value = $(this.innerHTML).selector;
+
+        if (value) {
+            var i = 0;
+            var re = new RegExp(value, "i");
+
+
+            var dots = d3.selectAll(".point");
+
+            dots.forEach(function () {
+
+                if (!dots[i].className.match(value)) {
+                    d3.select(dots[i])
+                     .style("visibility", "hidden");
+
+
+                    } else {
+                        d3.select(dots[i])
+                            .style("visibility", "visible")
+
+                    }
+                 });
+                i++;
+            }
+
+    })
 });
 
 
-
+Array.prototype.contains = function(v) {
+    for(var i = 0; i < this.length; i++) {
+        if(this[i] === v) return true;
+    }
+    return false;
+};
