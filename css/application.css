@@ -283,14 +283,14 @@ li {
 .fa .fa-square {
   color: #515661; }
 
-text:active, text:focus {
+p:active, p:focus {
   font-weight: 600;
   outline: none; }
 
-text i {
+p i {
   margin-right: 5px; }
 
-text:active i, text:focus i {
+p:active i, p:focus i {
   color: red; }
 
 table {

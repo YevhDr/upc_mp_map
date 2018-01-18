@@ -69,9 +69,14 @@ L.mask(latLngs).addTo(map);
 
 d3.json("data/bosses_latlon.json", function(data) {
 
+
+
    var category20b = d3.scale.linear()
        .range(['red','green']);
-    var cities = L.layerGroup();
+    var religious = L.layerGroup();
+    var nonreligious = L.layerGroup();
+    var lines = L.layerGroup();
+
 
 
 
@@ -82,25 +87,36 @@ d3.json("data/bosses_latlon.json", function(data) {
             k.lat = +k.lat;
             k.lon = +k.lon;
 
-      L.circle([k.lat, k.lon], {
-            color: 'none',
-            fillColor: category20b(k.religious),
-            fillOpacity: 0.4,
-            radius: 5000,
-            className: 'point' + " " + k.section
+            if(k.section === "Діяльність релігійних організацій"){
+                L.circle([k.lat, k.lon], {
+                    color: 'none',
+                    fillColor: 'green',
+                    fillOpacity: 0.4,
+                    radius: 5000,
+                    className: 'point'
 
 
-        }).addTo(cities).bindPopup(k.NAME);
+                }).addTo(religious).bindPopup(k.NAME);
+
+            } else {
+                L.circle([k.lat, k.lon], {
+                    color: 'none',
+                    fillColor: 'red',
+                    fillOpacity: 0.4,
+                    radius: 5000,
+                    className: 'point'
 
 
+                }).addTo(nonreligious).bindPopup(k.NAME);
+            }
 
-        map.addLayer(cities);
 
 
 
 
 
         });
+
 
         coordinates = [];
         sh = [];
@@ -113,15 +129,17 @@ d3.json("data/bosses_latlon.json", function(data) {
 
         var polyline = L.polyline(coordinates,
             {
-                color: 'grey',
+                color: 'lightgrey',
                 fillOpacity: 0.3,
-                weight: 0.5
-
-            }).addTo(cities);
-
+                weight: 1
+            }).addTo(lines);
 
 
-        map.addLayer(cities);
+
+        map.addLayer(lines);
+        map.addLayer(religious);
+        map.addLayer(nonreligious);
+
 
     });
 
@@ -159,7 +177,8 @@ d3.json("data/bosses_latlon.json", function(data) {
 
     var legend = legendTable.selectAll(".legend")
         .data(cs)
-        .enter().append("g")
+        .enter()
+        .append("g")
         .attr("class", "legend")
         .attr("transform", function(d, i) {
             return "translate(0, " + i * 20 + ")";
@@ -173,7 +192,7 @@ d3.json("data/bosses_latlon.json", function(data) {
     //     .style("fill", function(d) {
     //         return category20b(d); });
 
-    legend.append("text")
+    legend.append('text')
         .attr("x", width - 14)
         .attr("y", 9)
         .attr("dy", ".35em")
@@ -181,6 +200,7 @@ d3.json("data/bosses_latlon.json", function(data) {
         .text(function(d) {
             return d ; })
         .attr("class", "legend")
+        .attr("id", "2")
         .attr("tabindex", "1");
 
 
@@ -195,32 +215,57 @@ d3.json("data/bosses_latlon.json", function(data) {
 
 
         $(".legend").on("click", function () {
-        var value = $(this.innerHTML).selector;
-
-        if (value) {
-            var i = 0;
-            var re = new RegExp(value, "i");
 
 
-            var dots = d3.selectAll(".point");
 
-            dots.forEach(function () {
+            var value = $(this.innerHTML).selector;
+            var value2 = $(this.childNodes[0].innerHTML).selector;
 
-                if (!dots[i].className.match(value)) {
-                    d3.select(dots[i])
-                     .style("visibility", "hidden");
-
-
-                    } else {
-                        d3.select(dots[i])
-                            .style("visibility", "visible")
-
-                    }
-                 });
-                i++;
+            if (value === "Діяльність релігійних організацій" || value2 === "Діяльність релігійних організацій") {
+                map.removeLayer(religious);
+                map.removeLayer(nonreligious);
+                map.addLayer(religious);
+            }
+            else {
+                map.removeLayer(religious);
+                map.removeLayer(nonreligious);
+                map.addLayer(nonreligious);
             }
 
-    })
+
+
+
+
+
+            // newData.forEach(function (d, i){
+            //
+            //             L.circle([d.lat, d.lon], {
+            //                 color: 'none',
+            //                 fillColor: category20b(k.religious),
+            //                 fillOpacity: 0.4,
+            //                 radius: 5000,
+            //                 className: 'point'
+            //
+            //
+            //             }).redraw(cities);
+            //
+            //         });
+            //         // if(k.section != value) {
+            //         //
+            //         //     L.circle([k.lat, k.lon]).redraw(lines)
+            //         // }
+            //
+            //
+            //
+            //
+            //     // });
+            //
+            //     map.addLayer(cities)
+            // });
+
+
+
+});
 });
 
 
