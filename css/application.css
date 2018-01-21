@@ -283,18 +283,17 @@ li {
 .fa .fa-square {
   color: #515661; }
 
-p:active, p:focus {
-  font-weight: 600;
+text:active, text:focus {
+  font-size: 1.3rem;
+  font-weight: 800;
+  fill: #FAA61A;
   outline: none; }
-
-p i {
-  margin-right: 5px; }
-
-p:active i, p:focus i {
-  color: red; }
 
 table {
   margin-top: 40px; }
+
+.margin {
+  margin-left: -10px; }
 
 #legend {
   overflow: visible; }
