@@ -27,7 +27,7 @@ L.mask = function (latLngs, options) {
 
 
 // Polygon created with http://geojson.io/
-var france = {
+var ukraine = {
     "type": "FeatureCollection",
     "name": "ukraine",
     "features": [
@@ -59,7 +59,7 @@ map.addLayer(osm);
 map.setView(new L.LatLng(lat, lng), zoom);
 
 // transform geojson coordinates into an array of L.LatLng
-var coordinates = france.features[0].geometry.coordinates[0];
+var coordinates = ukraine.features[0].geometry.coordinates[0];
 var latLngs = [];
 for (i = 0; i < coordinates.length; i++) {
     latLngs.push(new L.LatLng(coordinates[i][1], coordinates[i][0]));
