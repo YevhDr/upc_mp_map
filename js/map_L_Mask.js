@@ -115,14 +115,14 @@ d3.json("data/bosses_geocoded.json", function (data) {
             {
                 color: 'lightgrey',
                 fillOpacity: 0.2,
-                weight: 2,
+                weight: 4,
                 className: 'line'
             });
 
 
         polyline.on('mouseover', function() {
             this.setStyle({
-                color: 'black',
+                color: '#5799fa',
                 fillOpacity: 0.5
                 // weight:
             });
@@ -173,12 +173,12 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
                        fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
                        fillOpacity: 0.8,
-                       radius: r,
+                       radius: r * 1.5,
                        className: 'selected'
                      }).addTo(test).bindPopup("Керівник: "+ d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
                 };
                 map.addLayer(test);
-                d3.selectAll('.point').attr("opacity", 0.4);
+                d3.selectAll('.point').attr("opacity", 0.8);
 
 
             });
