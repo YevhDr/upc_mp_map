@@ -75,8 +75,10 @@ d3.json("data/bosses_geocoded.json", function (data) {
     var category20b = d3.scale.linear()
         .range(['red', 'green']);
 
+
+
     var points = L.layerGroup();
-    //Create layers for each category
+
     var religious = L.layerGroup();
     var nonreligious = L.layerGroup();
     var administrative = L.layerGroup();
@@ -90,6 +92,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
     var labour_union = L.layerGroup();
     var medcine = L.layerGroup();
     var ngo = L.layerGroup();
+    var lines = L.layerGroup();
     var pererobna = L.layerGroup();
     var political = L.layerGroup();
     var realty = L.layerGroup();
@@ -99,7 +102,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
     var trade = L.layerGroup();
     var transport = L.layerGroup();
     var water = L.layerGroup();
-    var lines = L.layerGroup();
+
 
 
     // myObject = { value: 0 };
@@ -108,12 +111,47 @@ d3.json("data/bosses_geocoded.json", function (data) {
     //
     // console.log(this[anObjectName]);
 
-    var r = 5;
+    var r = 7;
 
-
+    // var layername = k.section_id;
+    // L.circleMarker.addTo([layername]);
 
     //Add each marker to corresponding layer
     data.forEach(function (d, i) {
+
+        //binds lines between orgs of one boss, latlng of each circle as coordinates for line
+        coordinates = [];
+        sh = [];
+        for (i = 0; i < d.orgs.length;) {
+            sh.push([d.orgs[i].Latitude, d.orgs[i].Longitude]);
+            i++;
+
+        }
+        coordinates.push(sh);
+
+        var polyline = L.polyline(coordinates,
+            {
+                color: 'lightgrey',
+                fillOpacity: 0.2,
+                weight: 3
+            });
+
+
+        polyline.on('mouseover', function() {
+            this.setStyle({
+                color: 'black'
+                // weight:
+            });
+        });
+        polyline.on('mouseout', function() {
+            this.setStyle({
+                color: 'lightgrey'
+                // weight: 2
+            });
+        });
+
+
+        polyline.addTo(lines); //-----end of lines' draw
 
         d.orgs.forEach(function (k, j) { //rich nested data inside d.orgs
 
@@ -121,11 +159,8 @@ d3.json("data/bosses_geocoded.json", function (data) {
             k.Longitude = +k.Longitude;
 
 
-
-            // layerName = k.section_id;
-
             if (k.section_id === "religious") {
-                L.circleMarker([k.Latitude, k.Longitude], {
+                var circle = L.circleMarker([k.Latitude, k.Longitude], {
                     color: 'none',
                     fillColor: setColor(k.religion),
                     fillOpacity: 0.7,
@@ -382,39 +417,8 @@ d3.json("data/bosses_geocoded.json", function (data) {
 
         }); //--------end of points' draw
 
-        //binds lines between orgs of one boss, latlng of each circle as coordinates for line
-        coordinates = [];
-        sh = [];
-        for (i = 0; i < d.orgs.length;) {
-            sh.push([d.orgs[i].Latitude, d.orgs[i].Longitude]);
-            i++;
-
-        }
-        coordinates.push(sh);
-
-        var polyline = L.polyline(coordinates,
-            {
-                color: 'lightgrey',
-                fillOpacity: 0.2,
-                weight: 3
-            });
 
 
-        polyline.on('mouseover', function() {
-            this.setStyle({
-                color: 'black'
-                // weight:
-                });
-        });
-        polyline.on('mouseout', function() {
-            this.setStyle({
-                color: 'lightgrey'
-                // weight: 2
-                 });
-        });
-
-
-        polyline.addTo(lines); //-----end of lines' draw
 
 
         points.addLayer(lines);
@@ -422,6 +426,10 @@ d3.json("data/bosses_geocoded.json", function (data) {
         points.addLayer(nonreligious);
 
 
+        // points.eachLayer(function (layer) {points.removeLayer(layer); });
+        // points.addLayer(lines);
+        // points.addLayer(religious);
+        // points.addLayer(nonreligious);
         map.addLayer(points);
 
 
@@ -619,4 +627,12 @@ setColor = function(x){
 
 };
 
+
+// var myString = "echoHello";
+//
+// window[myString] = function() {
+//     alert("Hello!");
+// };
+//
+// echoHello();
 
