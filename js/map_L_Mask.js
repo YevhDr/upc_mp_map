@@ -113,8 +113,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
 
     var r = 7;
 
-    // var layername = k.section_id;
-    // L.circleMarker.addTo([layername]);
+
 
     //Add each marker to corresponding layer
     data.forEach(function (d, i) {
@@ -168,7 +167,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(religious).bindPopup(k.NAME + " /ЄДРПОУ: " + k.EDRPOU + " /КВЕД: " + k.KVED);
+                }).addTo(religious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "art") {
@@ -180,7 +179,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(art).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(art).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "realty") {
@@ -192,7 +191,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(realty).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(realty).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "administrative") {
@@ -204,7 +203,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(administrative).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(administrative).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "building") {
@@ -216,7 +215,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(building).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(building).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "dobuvna") {
@@ -228,7 +227,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(dobuvna).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(dobuvna).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "education") {
@@ -240,7 +239,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(education).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(education).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "electricity") {
@@ -252,7 +251,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(electricity).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(electricity).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "government") {
@@ -264,7 +263,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(government).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(government).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "information") {
@@ -276,7 +275,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(information).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(information).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "labour_union") {
@@ -288,7 +287,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(labour_union).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(labour_union).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "medcine") {
@@ -300,7 +299,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(medcine).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(medcine).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "ngo") {
@@ -312,7 +311,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(ngo).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(ngo).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "pererobna") {
@@ -324,7 +323,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(pererobna).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(pererobna).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "political") {
@@ -336,7 +335,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(political).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(political).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "restaurants") {
@@ -348,7 +347,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(restaurants).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(restaurants).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "science") {
@@ -360,7 +359,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(science).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(science).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "silske") {
@@ -372,7 +371,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(silske).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(silske).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "trade") {
@@ -384,7 +383,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(trade).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(trade).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "transport") {
@@ -396,7 +395,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(transport).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(transport).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
             if (k.section_id === "water") {
@@ -408,7 +407,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     className: 'point'
 
 
-                }).addTo(water).addTo(nonreligious).bindPopup(k.NAME);
+                }).addTo(water).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
             }
 
