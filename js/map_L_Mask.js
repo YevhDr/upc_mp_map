@@ -71,45 +71,28 @@ L.mask(latLngs).addTo(map);
 
 d3.json("data/bosses_geocoded.json", function (data) {
 
-
     var category20b = d3.scale.linear()
         .range(['red', 'green']);
 
-
-
     var points = L.layerGroup();
-
-    var religious = L.layerGroup();
-    var nonreligious = L.layerGroup();
-    var administrative = L.layerGroup();
-    var art = L.layerGroup();
-    var building = L.layerGroup();
-    var dobuvna = L.layerGroup();
-    var education = L.layerGroup();
-    var electricity = L.layerGroup();
-    var government = L.layerGroup();
-    var information = L.layerGroup();
-    var labour_union = L.layerGroup();
-    var medcine = L.layerGroup();
-    var ngo = L.layerGroup();
     var lines = L.layerGroup();
-    var pererobna = L.layerGroup();
-    var political = L.layerGroup();
-    var realty = L.layerGroup();
-    var restaurants = L.layerGroup();
-    var science = L.layerGroup();
-    var silske = L.layerGroup();
-    var trade = L.layerGroup();
-    var transport = L.layerGroup();
-    var water = L.layerGroup();
+    var test = L.layerGroup();
 
 
+    var sections = {};
+    data.forEach(function(boss) {
+        boss.orgs.forEach(function(org) {
+            sections[org.section_id] = true})
+    });
 
-    // myObject = { value: 0 };
-    // anObjectName = "myObject";
-    // this[anObjectName].value++;
-    //
-    // console.log(this[anObjectName]);
+    // також додамо nonreligious так як така section в даних не фігурує
+    sections.nonreligious = true;
+
+    var layers = {};
+    Object.keys(sections).forEach(function(sec) {
+        layers[sec] = L.layerGroup();
+    });
+
 
     var r = 7;
 
@@ -132,307 +115,86 @@ d3.json("data/bosses_geocoded.json", function (data) {
             {
                 color: 'lightgrey',
                 fillOpacity: 0.2,
-                weight: 3
+                weight: 2,
+                className: 'line'
             });
 
 
         polyline.on('mouseover', function() {
             this.setStyle({
-                color: 'black'
+                color: 'black',
+                fillOpacity: 0.5
                 // weight:
             });
         });
+
         polyline.on('mouseout', function() {
             this.setStyle({
-                color: 'lightgrey'
+                color: 'lightgrey',
+                fillOpacity: 0.2
+
                 // weight: 2
             });
         });
 
 
+
         polyline.addTo(lines); //-----end of lines' draw
+
+
+        var boss = d.BOSS;
+
+
+        // var circle;
 
         d.orgs.forEach(function (k, j) { //rich nested data inside d.orgs
 
             k.Latitude = +k.Latitude;
             k.Longitude = +k.Longitude;
 
+            var circle = L.circleMarker([k.Latitude, k.Longitude], {
+                color: 'none',
+                fillColor: k.religious ? setColor(k.religion) : "#FAA61A",
+                fillOpacity: k.religious ? 0.7 : 0.4,
+                radius: r,
+                className: 'point'
+            }).bindPopup("Керівник: "+ d.BOSS + "/ Назва: " + k.NAME + "/ КВЕД: " + k.KVED).addTo(layers[k.section_id]);
 
-            if (k.section_id === "religious") {
-                var circle = L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: setColor(k.religion),
-                    fillOpacity: 0.7,
-                    radius: r,
-                    className: 'point'
+            if (!k.religious) circle.addTo(layers.nonreligious);
 
 
-                }).addTo(religious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
 
-            }
-            if (k.section_id === "art") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
 
+            circle.on("click", function() {
+                test.clearLayers();
 
-                }).addTo(art).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
+                for(i=0; i < d.orgs.length; i++){
 
-            }
-            if (k.section_id === "realty") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
+                    L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
+                       fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
+                       fillOpacity: 0.8,
+                       radius: r,
+                       className: 'selected'
+                     }).addTo(test).bindPopup("Керівник: "+ d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
+                };
+                map.addLayer(test);
+                d3.selectAll('.point').attr("opacity", 0.4);
 
 
-                }).addTo(realty).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "administrative") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(administrative).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "building") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(building).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "dobuvna") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(dobuvna).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "education") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(education).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "electricity") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(electricity).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "government") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(government).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "information") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(information).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "labour_union") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(labour_union).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "medcine") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(medcine).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "ngo") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(ngo).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "pererobna") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(pererobna).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "political") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(political).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "restaurants") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(restaurants).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "science") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(science).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "silske") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(silske).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "trade") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(trade).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "transport") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(transport).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-            if (k.section_id === "water") {
-                L.circleMarker([k.Latitude, k.Longitude], {
-                    color: 'none',
-                    fillColor: '#FAA61A',
-                    fillOpacity: 0.4,
-                    radius: r,
-                    className: 'point'
-
-
-                }).addTo(water).addTo(nonreligious).bindPopup(k.NAME + " /КВЕД: " + k.KVED);
-
-            }
-
-
+            });
 
 
         }); //--------end of points' draw
 
 
 
-
-
         points.addLayer(lines);
-        points.addLayer(religious);
-        points.addLayer(nonreligious);
+        points.addLayer(layers.religious);
+        points.addLayer(layers.nonreligious);
 
 
-        // points.eachLayer(function (layer) {points.removeLayer(layer); });
-        // points.addLayer(lines);
-        // points.addLayer(religious);
-        // points.addLayer(nonreligious);
         map.addLayer(points);
-
-
-
+        map.addLayer(test);
 
     });
 
@@ -449,11 +211,6 @@ d3.json("data/bosses_geocoded.json", function (data) {
         })
     });
 
-
-
-    // cs[0] = "Релігійні організації";
-    // cs[1] = "Нерелігійні організації";
-    // cs[2] = "Нерелігійні організації";
 
 
     var n = data.length, // total number of nodes
@@ -491,122 +248,57 @@ d3.json("data/bosses_geocoded.json", function (data) {
         .text(function (d) {
             return d;
         })
-        .attr("class", "legend")
-
-        .attr("id", "2")
+        // .attr("class", "legend")
         .attr("tabindex", "1");
 
+    $(".legend text").on("click", function () {
+        var value = $(this).text();
 
-    $(".legend").on("click", function () {
 
 
-        var value = $(this.innerHTML).selector;
-        var value2 = $(this.childNodes[0].innerHTML).selector;
+        var full_names = {
+            "Релігійні організації" : "religious",
+            "Нерелігійні організації" : "nonreligious",
+            "Адміністративне та допоміжне обслуговування": "administrative",
+            "Мистецтво, спорт, розваги та відпочинок" : "art",
+            "Будівництво" : "building",
+            "Освіта" : "education",
+            "Постачання електроенергії, газу" : "electricity",
+            "Державне управління й оборона" : "government",
+            "Інформація та телекомунікації" : "information",
+            "Громадські організації" : "ngo",
+            "Медицина і соцдопомога" : "medcine",
 
-        if (value === "Релігійні організації" || value2 === "Релігійні організації") {
-            points.eachLayer(function (layer) { points.removeLayer(layer); });
-            points.addLayer(religious);
-        }
-        if (value === "Нерелігійні організації" || value2 === "Нерелігійні організації") {
-            points.eachLayer(function (layer) {points.removeLayer(layer);});
-            points.addLayer(nonreligious);
-        }
-        if (value === "Адміністративне та допоміжне обслуговування" || value2 === "Адміністративне та допоміжне обслуговування") {
-            points.eachLayer(function (layer) { points.removeLayer(layer); });
-            points.addLayer(administrative);
-        }
-        if (value === "Мистецтво, спорт, розваги та відпочинок" || value2 === "Мистецтво, спорт, розваги та відпочинок") {
-            points.eachLayer(function (layer) { points.removeLayer(layer);});
-            points.addLayer(art);
-        }
-        if (value === "Будівництво" || value2 === "Будівництво") {
-            points.eachLayer(function (layer) { points.removeLayer(layer); });
-            points.addLayer(building);
-        }
-        if (value === "Освіта" || value2 === "Освіта") {
-            points.eachLayer(function (layer) { points.removeLayer(layer); });
-            points.addLayer(education);
-        }
-        if (value === "Постачання електроенергії, газу" || value2 === "Постачання електроенергії, газу") {
-            points.eachLayer(function (layer) { points.removeLayer(layer); });
-            points.addLayer(electricity);
-        }
-        if (value === "Державне управління й оборона" || value2 === "Державне управління й оборона") {
-            points.eachLayer(function (layer) { points.removeLayer(layer); });
-            points.addLayer(government);
-        }
-        if (value === "Інформація та телекомунікації" || value2 === "Інформація та телекомунікації") {
+            "Торгівля і ремонт авто" : "trade",
+            "Політичні організації" : "political",
+            "Транспорт, склади, пошта" : "transport",
+            "Сільське, лісове, рибне господарство" : "silske",
+            "Профспілки" : "labour_union",
+            "Переробна промисловість" : "pererobna",
+            "Операції з нерухомим майном" : "realty",
+            "Ресторани, харчування" : "restaurants",
+            "Водопостачання, каналізація, відходи" : "water",
+            "Добувна промисловість" : "dobuvna",
+            "Наукова та технічна діяльність" : "science"
+        };
+
+        if (full_names[value]) {
             points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(information);
+            points.addLayer(layers[full_names[value]]);
+            map.removeLayer(test);
         }
-        if (value === "Громадські організації" || value2 === "Громадські організації") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(ngo);
-        }
-        if (value === "Медицина і соцдопомога" || value2 === "Медицина і соцдопомога") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(medcine);
-        }
-        if (value === "Торгівля і ремонт авто" || value2 === "Торгівля і ремонт авто") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(trade);
-        }
-        if (value === "Політичні організації" || value2 === "Політичні організації") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(political);
-        }
-        if (value === "Транспорт, склади, пошта" || value2 === "Транспорт, склади, пошта") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(transport);
-        }
-        if (value === "Сільське, лісове, рибне господарство" || value2 === "Сільське, лісове, рибне господарство") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(silske);
-        }
-        if (value === "Профспілки" || value2 === "Профспілки") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(labour_union);
-        }
-        if (value === "Переробна промисловість" || value2 === "Переробна промисловість") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(pererobna);
-        }
-        if (value === "Операції з нерухомим майном" || value2 === "Операції з нерухомим майном") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(realty);
-        }
-        if (value === "Ресторани, харчування" || value2 === "Ресторани, харчування") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(restaurants);
-        }
-        if (value === "Водопостачання, каналізація, відходи" || value2 === "Водопостачання, каналізація, відходи") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(water);
-        }
-        if (value === "Добувна промисловість" || value2 === "Добувна промисловість") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(dobuvna);
-        }
-        if (value === "Наукова та технічна діяльність" || value2 === "Наукова та технічна діяльність") {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
-            points.addLayer(science);
-        }
-        if (value === "Показати всі" || value2 === "Показати всі") {
+
+        if (value === "Показати всі") {
+            map.removeLayer(test);
             points.eachLayer(function (layer) {points.removeLayer(layer); });
             points.addLayer(lines);
-            points.addLayer(religious);
-            points.addLayer(nonreligious);
-
-
-
-
+            points.addLayer(layers.religious);
+            points.addLayer(layers.nonreligious);
         }
-
-
-
-
     });
 });
+
+$(".legend").addClass("hello");
 
 
 Array.prototype.contains = function (v) {
@@ -625,13 +317,3 @@ setColor = function(x){
     }
 
 };
-
-
-// var myString = "echoHello";
-//
-// window[myString] = function() {
-//     alert("Hello!");
-// };
-//
-// echoHello();
-
