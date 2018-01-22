@@ -139,9 +139,13 @@ d3.json("data/bosses_geocoded.json", function (data) {
 
 
 
-//-----end of lines' draw
+        //-----end of lines' draw
 
 
+        var boss = d.BOSS;
+
+
+        // var circle;
 
         d.orgs.forEach(function (k, j) { //rich nested data inside d.orgs
 
@@ -156,13 +160,11 @@ d3.json("data/bosses_geocoded.json", function (data) {
                 className: 'point'
             }).bindPopup("Керівник: "+ d.BOSS + "/ Назва: " + k.NAME + "/ КВЕД: " + k.KVED).addTo(layers[k.section_id]);
 
-            if (!k.religious) circle.addTo(layers.nonreligious); //--------end of points' draw
+            if (!k.religious) circle.addTo(layers.nonreligious);
 
 
 
-// Виділення повʼязаних організацій по кліку
 
-            // на позначку
             circle.on("click", function() {
                 test.clearLayers();
 
@@ -176,16 +178,16 @@ d3.json("data/bosses_geocoded.json", function (data) {
                      }).addTo(test).bindPopup("Керівник: "+ d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
                 };
 
-                points = [];
-                line = [];
+                coordinates = [];
+                sh = [];
                 for (i = 0; i < d.orgs.length;) {
-                    line.push([d.orgs[i].Latitude, d.orgs[i].Longitude]);
+                    sh.push([d.orgs[i].Latitude, d.orgs[i].Longitude]);
                     i++;
 
                 }
-                points.push(line);
+                coordinates.push(sh);
 
-               L.polyline(points,
+                L.polyline(coordinates,
                     {
                         color: '#5799fa',
                         fillOpacity: 0.2,
@@ -194,41 +196,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     }).addTo(test);
 
 
-                map.addLayer(test);
-                d3.selectAll('.point').attr("opacity", 0.8);
 
-
-            });
-
-            polyline.on("click", function() {
-                test.clearLayers();
-
-                for(i=0; i < d.orgs.length; i++){
-
-                    L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
-                        fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                        fillOpacity: 0.8,
-                        radius: r * 1.5,
-                        className: 'selected'
-                    }).addTo(test).bindPopup("Керівник: "+ d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
-                };
-
-                points = [];
-                line = [];
-                for (i = 0; i < d.orgs.length;) {
-                    line.push([d.orgs[i].Latitude, d.orgs[i].Longitude]);
-                    i++;
-
-                }
-                points.push(line);
-
-                L.polyline(points,
-                    {
-                        color: '#5799fa',
-                        fillOpacity: 0.2,
-                        weight: 4,
-                        className: 'line'
-                    }).addTo(test);
 
 
                 map.addLayer(test);
@@ -238,8 +206,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
             });
 
 
-
-        });
+        }); //--------end of points' draw
 
 
 
