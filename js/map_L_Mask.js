@@ -49,8 +49,6 @@ var lng = 32;
 var zoom = 6;
 
 
-
-
 var osmUrl = 'https://api.mapbox.com/styles/v1/evgeshadrozdova/cjcb287ab1cyf2smtu3om56w8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ';
 var osmAttrib = 'Map data &copy; OpenStreetMap contributors';
 var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 20, zoomSnap: 0.5, attribution: osmAttrib});
@@ -68,7 +66,6 @@ for (i = 0; i < coordinates.length; i++) {
 L.mask(latLngs).addTo(map);
 
 
-
 d3.json("data/bosses_geocoded.json", function (data) {
 
     var category20b = d3.scale.linear()
@@ -80,22 +77,22 @@ d3.json("data/bosses_geocoded.json", function (data) {
 
 
     var sections = {};
-    data.forEach(function(boss) {
-        boss.orgs.forEach(function(org) {
-            sections[org.section_id] = true})
+    data.forEach(function (boss) {
+        boss.orgs.forEach(function (org) {
+            sections[org.section_id] = true
+        })
     });
 
     // також додамо nonreligious так як така section в даних не фігурує
     sections.nonreligious = true;
 
     var layers = {};
-    Object.keys(sections).forEach(function(sec) {
+    Object.keys(sections).forEach(function (sec) {
         layers[sec] = L.layerGroup();
     });
 
 
     var r = 7;
-
 
 
     //Add each marker to corresponding layer
@@ -120,7 +117,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
             }).addTo(lines);
 
 
-        polyline.on('mouseover', function() {
+        polyline.on('mouseover', function () {
             this.setStyle({
                 color: '#5799fa',
                 fillOpacity: 0.5
@@ -128,7 +125,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
             });
         });
 
-        polyline.on('mouseout', function() {
+        polyline.on('mouseout', function () {
             this.setStyle({
                 color: 'lightgrey',
                 fillOpacity: 0.2
@@ -136,7 +133,6 @@ d3.json("data/bosses_geocoded.json", function (data) {
                 // weight: 2
             });
         });
-
 
 
         //-----end of lines' draw
@@ -158,14 +154,12 @@ d3.json("data/bosses_geocoded.json", function (data) {
                 fillOpacity: k.religious ? 0.7 : 0.4,
                 radius: r,
                 className: 'point'
-            }).bindPopup("Керівник: "+ d.BOSS + "/ Назва: " + k.NAME + "/ КВЕД: " + k.KVED).addTo(layers[k.section_id]);
+            }).bindPopup("Керівник: " + d.BOSS + "/ Назва: " + k.NAME + "/ КВЕД: " + k.KVED).addTo(layers[k.section_id]);
 
             if (!k.religious) circle.addTo(layers.nonreligious);
 
 
-
-
-            circle.on("click", function() {
+            circle.on("click", function () {
                 test.clearLayers();
 
                 coordinates = [];
@@ -180,52 +174,47 @@ d3.json("data/bosses_geocoded.json", function (data) {
                 L.polyline(coordinates,
                     {
                         color: '#5799fa',
-                        fillOpacity: 0,
-                        weight: 0,
+                        fillOpacity: 0.8,
+                        weight: 3,
                         className: 'line'
                     }).addTo(test);
 
-                if (d.orgs[0].Latitude == d.orgs[1].Latitude && d.orgs[0].Longitude == d.orgs[1].Longitude){
+                if (d.orgs[0].Latitude == d.orgs[1].Latitude && d.orgs[0].Longitude == d.orgs[1].Longitude) {
 
-                     for(i=1; i < d.orgs.length; i++) {
+                    for (i = 0; i < d.orgs.length; i++) {
 
-                        L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude+(i/(i*30))], {
-                            fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                            fillOpacity: 0.8,
-                            radius: r * 1.5,
-                            className: 'selected'
-                        }).bindPopup("Керівник: " + d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED)
-                            .addTo(test);
 
-                    }}
-else {
+                            L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
+                                fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
+                                fillOpacity: 0.8,
+                                radius: r * 2,
+                                className: 'selected'
+                            }).bindPopup("Керівник: " + d.BOSS + "/ Назва1: " + d.orgs[0].NAME + + "/ Назва2: "
+                                + d.orgs[1].NAME + "/ КВЕД: " + d.orgs[i].KVED)
+                                .addTo(test);
+                    }
+                }
+                else {
                     for (i = 0; i < d.orgs.length; i++) {
                         L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
                             fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
                             fillOpacity: 0.8,
-                            radius: r * 1.5,
+                            radius: r * 2,
                             className: 'selected'
                         }).addTo(test).bindPopup("Керівник: " + d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
                     }
                 }
 
 
-
-
-
-
-
-
                 map.addLayer(test);
                 d3.selectAll('.point').attr("opacity", 0.7);
-                d3.selectAll('.line').attr("opacity", 0.4);
+                // d3.selectAll('.line').attr("opacity", 0.4);
 
 
             });
 
 
         }); //--------end of points' draw
-
 
 
         points.addLayer(lines);
@@ -250,7 +239,6 @@ else {
             }
         })
     });
-
 
 
     var n = data.length, // total number of nodes
@@ -296,42 +284,45 @@ else {
         d3.select("#menu").html('').append('h2').text(value);
 
 
-
         var full_names = {
-            "Релігійні організації" : "religious",
-            "Нерелігійні організації" : "nonreligious",
+            "Релігійні організації": "religious",
+            "Нерелігійні організації": "nonreligious",
             "Адміністративне та допоміжне обслуговування": "administrative",
-            "Мистецтво, спорт, розваги та відпочинок" : "art",
-            "Будівництво" : "building",
-            "Освіта" : "education",
-            "Постачання електроенергії, газу" : "electricity",
-            "Державне управління й оборона" : "government",
-            "Інформація та телекомунікації" : "information",
-            "Громадські організації" : "ngo",
-            "Медицина і соцдопомога" : "medcine",
+            "Мистецтво, спорт, розваги та відпочинок": "art",
+            "Будівництво": "building",
+            "Освіта": "education",
+            "Постачання електроенергії, газу": "electricity",
+            "Державне управління й оборона": "government",
+            "Інформація та телекомунікації": "information",
+            "Громадські організації": "ngo",
+            "Медицина і соцдопомога": "medcine",
 
-            "Торгівля і ремонт авто" : "trade",
-            "Політичні організації" : "political",
-            "Транспорт, склади, пошта" : "transport",
-            "Сільське, лісове, рибне господарство" : "silske",
-            "Профспілки" : "labour_union",
-            "Переробна промисловість" : "pererobna",
-            "Операції з нерухомим майном" : "realty",
-            "Ресторани, харчування" : "restaurants",
-            "Водопостачання, каналізація, відходи" : "water",
-            "Добувна промисловість" : "dobuvna",
-            "Наукова та технічна діяльність" : "science"
+            "Торгівля і ремонт авто": "trade",
+            "Політичні організації": "political",
+            "Транспорт, склади, пошта": "transport",
+            "Сільське, лісове, рибне господарство": "silske",
+            "Профспілки": "labour_union",
+            "Переробна промисловість": "pererobna",
+            "Операції з нерухомим майном": "realty",
+            "Ресторани, харчування": "restaurants",
+            "Водопостачання, каналізація, відходи": "water",
+            "Добувна промисловість": "dobuvna",
+            "Наукова та технічна діяльність": "science"
         };
 
         if (full_names[value]) {
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
+            points.eachLayer(function (layer) {
+                points.removeLayer(layer);
+            });
             points.addLayer(layers[full_names[value]]);
             map.removeLayer(test);
         }
 
         if (value === "Показати всі") {
             map.removeLayer(test);
-            points.eachLayer(function (layer) {points.removeLayer(layer); });
+            points.eachLayer(function (layer) {
+                points.removeLayer(layer);
+            });
             points.addLayer(lines);
             points.addLayer(layers.religious);
             points.addLayer(layers.nonreligious);
@@ -349,7 +340,7 @@ Array.prototype.contains = function (v) {
     return false;
 };
 
-setColor = function(x){
+setColor = function (x) {
     if (x == "УПЦ МП") {
         return "grey";
     }
