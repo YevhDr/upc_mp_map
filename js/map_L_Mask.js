@@ -184,51 +184,37 @@ d3.json("data/bosses_geocoded.json", function (data) {
 
                 for (i = 0; i < d.orgs.length; i++) {
 
-                    //це не працює, як задати, що треба порівнювати і та і + 1 допоки і не є останньою
-                        if (i < d.orgs.length && d.orgs[i].Latitude == d.orgs[i + 1].Latitude && d.orgs[i].Longitude == d.orgs[i + 1].Longitude) {
+                    var circle_ckick = L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
+                        fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
+                        fillOpacity: 0.8,
+                        radius: r * 2,
+                        className: 'selected'
+                    }).addTo(test);
 
-
+                   //порівнювати і та і + 1 допоки і не є останньою
+                    if (i < (d.orgs.length-1)
+                        && d.orgs[i].Latitude == d.orgs[i + 1].Latitude
+                        && d.orgs[i].Longitude == d.orgs[i + 1].Longitude) {
                         // додати усі назви, якщо співпадають координати в середині d.orgs
-                        L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
-                            fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                            fillOpacity: 0.8,
-                            radius: r * 2,
-                            className: 'selected'
-                        }).bindPopup("Керівник: " + d.BOSS + "<br><br>/ Назва 1: " + d.orgs[0].NAME + "/ КВЕД: " + d.orgs[0].KVED + "<br><br> / Назва 2: " + d.orgs[1].NAME + "/ КВЕД: " + d.orgs[1].KVED) // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
-                            .addTo(test);
+                        circle_ckick.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
                     }
-                    if (i == d.orgs.length && d.orgs[i].Latitude == d.orgs[i - 1].Latitude && d.orgs[i].Longitude == d.orgs[i - 1].Longitude) {
-
-
+                    //якщо і останнья, то порівнюваємо з попередньо
+                    if (i == (d.orgs.length-1)
+                        && d.orgs[i].Latitude == d.orgs[i - 1].Latitude
+                        && d.orgs[i].Longitude == d.orgs[i - 1].Longitude) {
                         // додати усі назви, якщо співпадають координати в середині d.orgs
-                        L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
-                            fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                            fillOpacity: 0.8,
-                            radius: r * 2,
-                            className: 'selected'
-                        }).bindPopup("Керівник: " + d.BOSS + "<br><br>/ Назва 1: " + d.orgs[0].NAME + "/ КВЕД: " + d.orgs[0].KVED + "<br><br> / Назва 2: " + d.orgs[1].NAME + "/ КВЕД: " + d.orgs[1].KVED) // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
-                            .addTo(test);
+                        circle_ckick.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
                     }
-
-
-
-//якщо координати не співпадають
-                    if (d.orgs[i].Latitude != d.orgs[i + 1].Latitude ||  d.orgs[i].Latitude != d.orgs[i - 1].Latitude ) {
-
-                            L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
-                                fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                                fillOpacity: 0.8,
-                                radius: r * 2,
-                                className: 'selected'
-                            }).addTo(test).bindPopup("Керівник: " + d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
-
+                    //якщо координати не співпадають, додаємо звичайний Popup
+                    else {
+                    circle_ckick.bindPopup("Керівник: " + d.BOSS + " Назва: " + d.orgs[i].NAME + " КВЕД: " + d.orgs[i].KVED);
                     }
                 }
 
 
-                        map.addLayer(test);
-                        d3.selectAll('.point').attr("opacity", 0.7);
-                        // d3.selectAll('.line').attr("opacity", 0.4);
+                map.addLayer(test);
+                d3.selectAll('.point').attr("opacity", 0.7);
+                // d3.selectAll('.line').attr("opacity", 0.4);
 
 
             });
