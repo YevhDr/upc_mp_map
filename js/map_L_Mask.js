@@ -179,7 +179,6 @@ d3.json("data/bosses_geocoded.json", function (data) {
 
 
 
-
             if (!d.orgs[i].religious) circle.addTo(layers.nonreligious);
 
 // СIRCLE ON CLICK
