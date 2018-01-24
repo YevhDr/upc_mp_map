@@ -159,9 +159,9 @@ d3.json("data/bosses_geocoded.json", function (data) {
             if (!k.religious) circle.addTo(layers.nonreligious);
 
 
-            circle.on("click", function () {
+            circle.on("click", function () { //створюємо окремий тимчасовий шар, куди додаємо організації цього циклу
                 test.clearLayers();
-
+//додаємо лінію
                 coordinates = [];
                 sh = [];
                 for (i = 0; i < d.orgs.length;) {
@@ -179,38 +179,41 @@ d3.json("data/bosses_geocoded.json", function (data) {
                         className: 'line'
                     }).addTo(test);
 
-                if (d.orgs[0].Latitude == d.orgs[1].Latitude && d.orgs[0].Longitude == d.orgs[1].Longitude) {
 
+// додаємо маркери
                     for (i = 0; i < d.orgs.length; i++) {
 
+// додати усі назви, якщо співпадають координати в середині d.orgs
+                        if (d.orgs[i].Latitude == d.orgs[i + 1].Latitude && d.orgs[i].Longitude == d.orgs[i + 1].Longitude ||
+                            d.orgs[i].Latitude == d.orgs[i - 1].Latitude && d.orgs[i].Longitude == d.orgs[i - 1].Longitude) {
 
                             L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
                                 fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
                                 fillOpacity: 0.8,
                                 radius: r * 2,
                                 className: 'selected'
-                            }).bindPopup("Керівник: " + d.BOSS + "/ Назва1: " + d.orgs[0].NAME + + "/ Назва2: "
-                                + d.orgs[1].NAME + "/ КВЕД: " + d.orgs[i].KVED)
+                            }).bindPopup("Керівник: " + d.BOSS + "<br><br>/ Назва 1: " + d.orgs[0].NAME + "/ КВЕД: " + d.orgs[0].KVED + "<br><br> / Назва 2: " + d.orgs[1].NAME + "/ КВЕД: " + d.orgs[1].KVED) // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
                                 .addTo(test);
+                        }
+
+//якщо координати не співпадають
+                        else {
+                            for (i = 0; i < d.orgs.length; i++) {
+                                L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
+                                    fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
+                                    fillOpacity: 0.8,
+                                    radius: r * 2,
+                                    className: 'selected'
+                                }).addTo(test).bindPopup("Керівник: " + d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
+                            }
+                        }
+
+
+                        map.addLayer(test);
+                        d3.selectAll('.point').attr("opacity", 0.7);
+                        // d3.selectAll('.line').attr("opacity", 0.4);
+
                     }
-                }
-                else {
-                    for (i = 0; i < d.orgs.length; i++) {
-                        L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
-                            fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                            fillOpacity: 0.8,
-                            radius: r * 2,
-                            className: 'selected'
-                        }).addTo(test).bindPopup("Керівник: " + d.BOSS + "/ Назва: " + d.orgs[i].NAME + "/ КВЕД: " + d.orgs[i].KVED);
-                    }
-                }
-
-
-                map.addLayer(test);
-                d3.selectAll('.point').attr("opacity", 0.7);
-                // d3.selectAll('.line').attr("opacity", 0.4);
-
-
             });
 
 
