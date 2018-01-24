@@ -143,22 +143,46 @@ d3.json("data/bosses_geocoded.json", function (data) {
 
         // var circle;
 
-        d.orgs.forEach(function (k, j) { //rich nested data inside d.orgs
+        for (i = 0; i < d.orgs.length; i++) { //rich nested data inside d.orgs
 
-            k.Latitude = +k.Latitude;
-            k.Longitude = +k.Longitude;
+            d.orgs[i].Latitude = +d.orgs[i].Latitude;
+            d.orgs[i].Longitude = +d.orgs[i].Longitude;
 
-            var circle = L.circleMarker([k.Latitude, k.Longitude], {
+            var circle = L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
                 color: 'none',
-                fillColor: k.religious ? setColor(k.religion) : "#FAA61A",
-                fillOpacity: k.religious ? 0.7 : 0.4,
+                fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
+                fillOpacity: d.orgs[i].religious ? 0.7 : 0.4,
                 radius: r,
                 className: 'point'
-            }).bindPopup("Керівник: " + d.BOSS + "/ Назва: " + k.NAME + "/ КВЕД: " + k.KVED).addTo(layers[k.section_id]);
-
-            if (!k.religious) circle.addTo(layers.nonreligious);
+            }).addTo(layers[d.orgs[i].section_id]);
 
 
+            if (i < (d.orgs.length-1)
+                && d.orgs[i].Latitude == d.orgs[i + 1].Latitude
+                && d.orgs[i].Longitude == d.orgs[i + 1].Longitude) {
+                // додати усі назви, якщо співпадають координати в середині d.orgs
+                circle.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
+            }
+            //якщо і останнья, то порівнюваємо з попередньо
+            if (i == (d.orgs.length-1)
+                && d.orgs[i].Latitude == d.orgs[i - 1].Latitude
+                && d.orgs[i].Longitude == d.orgs[i - 1].Longitude) {
+                // додати усі назви, якщо співпадають координати в середині d.orgs
+                circle.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
+            }
+            //якщо координати не співпадають, додаємо звичайний Popup
+            else {
+                circle.bindPopup("Керівник: " + d.BOSS + "<br> Назва: " + d.orgs[i].NAME + "<br> КВЕД: " + d.orgs[i].KVED);
+            }
+
+            //circle.bindPopup("Керівник: " + d.BOSS + "<br> Назва: " + k.NAME + "<br> КВЕД: " + k.KVED);
+
+
+
+
+            if (!d.orgs[i].religious) circle.addTo(layers.nonreligious);
+
+// СIRCLE ON CLICK
             circle.on("click", function () { //створюємо окремий тимчасовий шар, куди додаємо організації цього циклу
                 test.clearLayers();
 //додаємо лінію
@@ -207,7 +231,7 @@ d3.json("data/bosses_geocoded.json", function (data) {
                     }
                     //якщо координати не співпадають, додаємо звичайний Popup
                     else {
-                    circle_ckick.bindPopup("Керівник: " + d.BOSS + " Назва: " + d.orgs[i].NAME + " КВЕД: " + d.orgs[i].KVED);
+                    circle_ckick.bindPopup("Керівник: " + d.BOSS + "<br> Назва: " + d.orgs[i].NAME + "<br> КВЕД: " + d.orgs[i].KVED);
                     }
                 }
 
@@ -217,10 +241,10 @@ d3.json("data/bosses_geocoded.json", function (data) {
                 // d3.selectAll('.line').attr("opacity", 0.4);
 
 
-            });
+            }); // end of СIRCLE ON CLICK
 
 
-        }); //--------end of points' draw
+        }; //--------end of points' draw
 
 
         points.addLayer(lines);
