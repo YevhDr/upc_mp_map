@@ -1,6 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Andika");
 html {
   position: relative;
   min-height: 100%; }
+
+body {
+  font-family: 'PT Sans', sans-serif;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  background-color: #59595C !important;
+  color: #ecedef !important;
+  overflow-x: hidden; }
 
 a {
   color: inherit;
@@ -13,21 +22,6 @@ a {
     /*for links*/
     color: #4b444d;
     border-bottom: 2px dotted #cccccc; }
-
-h1 {
-  font-size: 3.5em;
-  line-height: 1.8em;
-  font-weight: bold; }
-
-h2 {
-  font-size: 2em;
-  line-height: 2em;
-  font-weight: bold; }
-
-h3 {
-  font-size: 1.8em;
-  line-height: 2.2em;
-  font-weight: normal; }
 
 /* ======== HEADER ======== */
 .logo {
@@ -256,22 +250,66 @@ h3 {
       fill: none;
       stroke: none; }
 
-body {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  font-size: 16px;
-  color: #515661; }
+.jumbotron {
+  padding-top: 10px !important;
+  background-color: #ffffff !important;
+  background-size: cover;
+  height: 100vh;
+  width: 30vw;
+  margin-left: 30vw; }
 
-.container {
-  margin-top: 30px; }
+img.img {
+  width: 100%;
+  margin: 50px 0 50px 0; }
 
+h1 {
+  font-size: 7rem !important;
+  text-align: center !important;
+  line-height: 4rem;
+  font-weight: 800 !important;
+  margin: 20px 0 50px 0 !important;
+  padding: 20px; }
+
+h2 {
+  font-size: 3rem !important;
+  line-height: 5rem !important;
+  font-weight: 700 !important;
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+  padding: 5px; }
+
+h3 {
+  margin-top: 50px !important;
+  font-size: 1.5rem !important;
+  line-height: 2.7rem !important;
+  font-weight: 800 !important;
+  text-align: justify; }
+
+h5 {
+  text-align: right;
+  margin-bottom: 40px !important;
+  color: white !important; }
+
+.paragraph {
+  font-size: 1.7rem;
+  line-height: 2.5rem;
+  text-align: left;
+  margin-bottom: 20px; }
+
+p span {
+  font-size: 1.3rem;
+  line-height: 1rem; }
+
+/*------ MAP ----- */
 #map {
-  max-width: 900px;
-  height: 600px; }
+  max-width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 600px;
+  text-align: center; }
 
-#mymap {
-  max-width: 900px;
-  height: 600px; }
+.leaflet-map {
+  margin: 50px 0 50px 0; }
 
 h2 {
   font-size: 1.5rem;
@@ -297,6 +335,16 @@ text:active, text:focus {
   fill: #FAA61A;
   outline: none; }
 
+.description {
+  font-size: calc(16px * 0.5vw) !important;
+  margin-right: 5%;
+  text-align: right;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.point {
+  color: #8d8d8d; }
+
 table {
   margin-top: 40px; }
 
@@ -311,5 +359,11 @@ table {
 
 .flex-cont {
   display: flex; }
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: white;
+  color: #333;
+  opacity: 0.8;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4); }
 
 /*# sourceMappingURL=application.css.map */

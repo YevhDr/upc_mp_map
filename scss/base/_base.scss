@@ -3,6 +3,15 @@ html {
     min-height: 100%;
 }
 
+body {
+    //font-family: 'Andika', sans-serif!important;
+    font-family: 'PT Sans', sans-serif;
+    margin: 0 0 0 0;
+    padding:0 0 0 0;
+    background-color: #59595C!important;
+    color: #ecedef !important;
+    overflow-x: hidden;
+}
 
 
 a {
@@ -21,17 +30,7 @@ a {
 }
 
 
-h1 {
-  @include text(3.5em, 1.8em, bold);
-}
 
-h2 {
-  @include text(2em, 2em, bold);
-}
-
-h3 {
-  @include text(1.8em, 2.2em, normal);
-}
 
 //p,li {
 //    @include text(1.6em,2em);

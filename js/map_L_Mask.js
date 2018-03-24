@@ -2,7 +2,7 @@
 L.Mask = L.Polygon.extend({
     options: {
         stroke: false,
-        color: '#fff',
+        color: '#383e47',
         fillOpacity: 1,
         clickable: true,
 
@@ -26,7 +26,7 @@ L.mask = function (latLngs, options) {
 };
 
 
-// Polygon created with http://geojson.io/
+//Polygon created with http://geojson.io/
 var ukraine = {
     "type": "FeatureCollection",
     "name": "ukraine",
@@ -41,8 +41,8 @@ var ukraine = {
 };
 
 
-var map = new L.Map('map');
 
+var map = new L.Map('map');
 
 var lat = 49;
 var lng = 32;
@@ -54,10 +54,10 @@ var osmAttrib = 'Map data &copy; OpenStreetMap contributors';
 var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 20, zoomSnap: 0.5, attribution: osmAttrib});
 map.addLayer(osm);
 
-map.setView(new L.LatLng(lat, lng), zoom);
+map.setView(new L.LatLng(lat, lng), zoom).scrollWheelZoom.disable();
 
 // transform geojson coordinates into an array of L.LatLng
-var coordinates = ukraine.features[0].geometry.coordinates[0];
+var coordinates = ukraine.features[0].geometry.coordinates[0];                                                                                                                                                                                                                                    
 var latLngs = [];
 for (i = 0; i < coordinates.length; i++) {
     latLngs.push(new L.LatLng(coordinates[i][1], coordinates[i][0]));
@@ -66,300 +66,56 @@ for (i = 0; i < coordinates.length; i++) {
 L.mask(latLngs).addTo(map);
 
 
-d3.json("data/bosses_geocoded.json", function (data) {
+d3.csv("data/upc_mp_geocoded.csv", function (data) {
 
-    var category20b = d3.scale.linear()
-        .range(['red', 'green']);
+     
 
-    var points = L.layerGroup();
-    var lines = L.layerGroup();
-    var test = L.layerGroup();
+    
 
+        for (i = 0; i < data.length; i++) { //rich nested data inside d.orgs
 
-    var sections = {};
-    data.forEach(function (boss) {
-        boss.orgs.forEach(function (org) {
-            sections[org.section_id] = true
-        })
-    });
+            data[i].Latitude = +data[i].Latitude;
+            data[i].Longitude = +data[i].Longitude;
 
-    // також додамо nonreligious так як така section в даних не фігурує
-    sections.nonreligious = true;
+            var circle = new L.Circle([data[i].Latitude, data[i].Longitude], {
+               radius: 1400,
+               color: '#8d8d8d',
+               weight: 0.5,
+               fillColor: '#f8a603',
+               fillOpacity: 0.8,
+               riseOnHover: true
 
-    var layers = {};
-    Object.keys(sections).forEach(function (sec) {
-        layers[sec] = L.layerGroup();
-    });
-
-
-    var r = 7;
-
-
-    //Add each marker to corresponding layer
-    data.forEach(function (d, i) {
-
-        //binds lines between orgs of one boss, latlng of each circle as coordinates for line
-        coordinates = [];
-        sh = [];
-        for (i = 0; i < d.orgs.length;) {
-            sh.push([d.orgs[i].Latitude, d.orgs[i].Longitude]);
-            i++;
-
-        }
-        coordinates.push(sh);
-
-        var polyline = L.polyline(coordinates,
-            {
-                color: 'lightgrey',
-                fillOpacity: 0.2,
-                weight: 2,
-                className: 'line'
-            }).addTo(lines);
-
-
-        polyline.on('mouseover', function () {
-            this.setStyle({
-                color: '#5799fa',
-                fillOpacity: 0.5
-                // weight:
+                // className: 'point'
             });
-        });
 
-        polyline.on('mouseout', function () {
-            this.setStyle({
-                color: 'lightgrey',
-                fillOpacity: 0.2
+            
 
-                // weight: 2
-            });
-        });
+            circle.setRadius(circle.getRadius() * 2);
+            circle.bindPopup(data[i].NAME + "<br><br>" +  data[i].ADDRESS ).openPopup().addTo(map);
 
 
-        //-----end of lines' draw
+            // circle.on('mouseover', function(e){
+            //     marker.openPopup();
+            // });[data[i].ADDRESS]
 
-
-        var boss = d.BOSS;
-
-
-        // var circle;
-
-        for (i = 0; i < d.orgs.length; i++) { //rich nested data inside d.orgs
-
-            d.orgs[i].Latitude = +d.orgs[i].Latitude;
-            d.orgs[i].Longitude = +d.orgs[i].Longitude;
-
-            var circle = L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
-                color: 'none',
-                fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                fillOpacity: d.orgs[i].religious ? 0.7 : 0.4,
-                radius: r,
-                className: 'point'
-            }).addTo(layers[d.orgs[i].section_id]);
-
-
-            if (i < (d.orgs.length-1)
-                && d.orgs[i].Latitude == d.orgs[i + 1].Latitude
-                && d.orgs[i].Longitude == d.orgs[i + 1].Longitude) {
-                // додати усі назви, якщо співпадають координати в середині d.orgs
-                circle.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
-            }
-            //якщо і останнья, то порівнюваємо з попередньо
-            if (i == (d.orgs.length-1)
-                && d.orgs[i].Latitude == d.orgs[i - 1].Latitude
-                && d.orgs[i].Longitude == d.orgs[i - 1].Longitude) {
-                // додати усі назви, якщо співпадають координати в середині d.orgs
-                circle.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
-            }
-            //якщо координати не співпадають, додаємо звичайний Popup
-            else {
-                circle.bindPopup("Керівник: " + d.BOSS + "<br> Назва: " + d.orgs[i].NAME + "<br> КВЕД: " + d.orgs[i].KVED);
-            }
-
-            //circle.bindPopup("Керівник: " + d.BOSS + "<br> Назва: " + k.NAME + "<br> КВЕД: " + k.KVED);
+        } //--------end of points' draw
 
 
 
-            if (!d.orgs[i].religious) circle.addTo(layers.nonreligious);
-
-// СIRCLE ON CLICK
-            circle.on("click", function () { //створюємо окремий тимчасовий шар, куди додаємо організації цього циклу
-                test.clearLayers();
-//додаємо лінію
-                coordinates = [];
-                sh = [];
-                for (i = 0; i < d.orgs.length;) {
-                    sh.push([d.orgs[i].Latitude, d.orgs[i].Longitude]);
-                    i++;
-
-                }
-                coordinates.push(sh);
-
-                L.polyline(coordinates,
-                    {
-                        color: '#5799fa',
-                        fillOpacity: 0.8,
-                        weight: 3,
-                        className: 'line'
-                    }).addTo(test);
+    // map.on('zoomend', function() {
+    //     var currentZoom = map.getZoom();
+    //     circle.setRadius(currentZoom);
+    // });
 
 
-// додаємо маркери
+    // });
 
-                for (i = 0; i < d.orgs.length; i++) {
+ 
 
-                    var circle_ckick = L.circleMarker([d.orgs[i].Latitude, d.orgs[i].Longitude], {
-                        fillColor: d.orgs[i].religious ? setColor(d.orgs[i].religion) : "#FAA61A",
-                        fillOpacity: 0.8,
-                        radius: r * 2,
-                        className: 'selected'
-                    }).addTo(test);
-
-                   //порівнювати і та і + 1 допоки і не є останньою
-                    if (i < (d.orgs.length-1)
-                        && d.orgs[i].Latitude == d.orgs[i + 1].Latitude
-                        && d.orgs[i].Longitude == d.orgs[i + 1].Longitude) {
-                        // додати усі назви, якщо співпадають координати в середині d.orgs
-                        circle_ckick.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
-                    }
-                    //якщо і останнья, то порівнюваємо з попередньо
-                    if (i == (d.orgs.length-1)
-                        && d.orgs[i].Latitude == d.orgs[i - 1].Latitude
-                        && d.orgs[i].Longitude == d.orgs[i - 1].Longitude) {
-                        // додати усі назви, якщо співпадають координати в середині d.orgs
-                        circle_ckick.bindPopup("Керівник: " + d.BOSS + "<br><br> Назва 1: " + d.orgs[0].NAME + " КВЕД: " + d.orgs[0].KVED + "<br><br>  Назва 2: " + d.orgs[1].NAME + " КВЕД: " + d.orgs[1].KVED); // як задати так, аби кількість назв залежала від d.orgs.length - зараз в мене на повторний клік відкриваються перші дві назви
-                    }
-                    //якщо координати не співпадають, додаємо звичайний Popup
-                    else {
-                    circle_ckick.bindPopup("Керівник: " + d.BOSS + "<br> Назва: " + d.orgs[i].NAME + "<br> КВЕД: " + d.orgs[i].KVED);
-                    }
-                }
-
-
-                map.addLayer(test);
-                d3.selectAll('.point').attr("opacity", 0.7);
-                // d3.selectAll('.line').attr("opacity", 0.4);
-
-
-            }); // end of СIRCLE ON CLICK
-
-
-        }; //--------end of points' draw
-
-
-        points.addLayer(lines);
-        points.addLayer(layers.religious);
-        points.addLayer(layers.nonreligious);
-
-
-        map.addLayer(points);
-        map.addLayer(test);
-
-    });
-
-//define unique sections as data for right focus menu
-    var cs = [];
-    cs.push("Показати всі");
-    cs.push("Релігійні організації");
-    cs.push("Нерелігійні організації");
-    data.forEach(function (d, i) {
-        d.orgs.forEach(function (k, j) {
-            if (!cs.contains(k.section)) {
-                cs.push(k.section);
-            }
-        })
-    });
-
-
-    var n = data.length, // total number of nodes
-        m = cs.length, // number of clusters
-        margin = 30,
-        width = 300,
-        height = 500;// number of distinct clusters
-
-//add legend
-    var svg_a = d3.select("#legend")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("class", "flex-cont");
-
-
-    var legendTable = svg_a.append("g")
-        .attr("transform", "translate(0, " + margin + ")")
-        .attr("class", "legendTable");
-
-    var legend = legendTable.selectAll(".legend")
-        .data(cs)
-        .enter()
-        .append("g")
-        .attr("class", "legend")
-        .attr("transform", function (d, i) {
-            return "translate(0, " + i * 20 + ")";
-        });
-
-    legend.append('text')
-        .attr("x", width - 300)
-        .attr("y", 9)
-        .attr("dy", ".35em")
-        .style("text-anchor", "start")
-        .text(function (d) {
-            return d;
-        })
-        // .attr("class", "legend")
-        .attr("tabindex", "1");
-
-    $(".legend text").on("click", function () {
-        var value = $(this).text();
-        d3.select("#menu").html('').append('h2').text(value);
-
-
-        var full_names = {
-            "Релігійні організації": "religious",
-            "Нерелігійні організації": "nonreligious",
-            "Адміністративне та допоміжне обслуговування": "administrative",
-            "Мистецтво, спорт, розваги та відпочинок": "art",
-            "Будівництво": "building",
-            "Освіта": "education",
-            "Постачання електроенергії, газу": "electricity",
-            "Державне управління й оборона": "government",
-            "Інформація та телекомунікації": "information",
-            "Громадські організації": "ngo",
-            "Медицина і соцдопомога": "medcine",
-
-            "Торгівля і ремонт авто": "trade",
-            "Політичні організації": "political",
-            "Транспорт, склади, пошта": "transport",
-            "Сільське, лісове, рибне господарство": "silske",
-            "Профспілки": "labour_union",
-            "Переробна промисловість": "pererobna",
-            "Операції з нерухомим майном": "realty",
-            "Ресторани, харчування": "restaurants",
-            "Водопостачання, каналізація, відходи": "water",
-            "Добувна промисловість": "dobuvna",
-            "Наукова та технічна діяльність": "science"
-        };
-
-        if (full_names[value]) {
-            points.eachLayer(function (layer) {
-                points.removeLayer(layer);
-            });
-            points.addLayer(layers[full_names[value]]);
-            map.removeLayer(test);
-        }
-
-        if (value === "Показати всі") {
-            map.removeLayer(test);
-            points.eachLayer(function (layer) {
-                points.removeLayer(layer);
-            });
-            points.addLayer(lines);
-            points.addLayer(layers.religious);
-            points.addLayer(layers.nonreligious);
-        }
-    });
+   
 });
 
-$(".legend").addClass("hello");
+
 
 
 Array.prototype.contains = function (v) {
@@ -369,12 +125,4 @@ Array.prototype.contains = function (v) {
     return false;
 };
 
-setColor = function (x) {
-    if (x == "УПЦ МП") {
-        return "grey";
-    }
-    else {
-        return "red";
-    }
 
-};
