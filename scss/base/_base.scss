@@ -1,40 +1,54 @@
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
-
-$background-color:#59595C;
-$text-color: #fff;
 
 body {
-    //font-family: 'Andika', sans-serif!important;
-    font-family: 'PT Sans', sans-serif;
-    margin: 0 0 0 0;
-    padding:0 0 0 0;
-    background-color: $text-color !important;
-    color: $background-color!important;
-    overflow-x: hidden;
+  font-family: $main-serif;
+  font-size: 100%;
+  color: $main-text;
+  width: 100%;
+  /*footer height plus padding*/
+  margin-bottom: 200px;
+  overflow-x: hidden;
 }
 
-
 a {
-    color: inherit;
+  color: white!important;
+  text-decoration: none;
+  &:link {
     text-decoration: none;
-    &:link {
-        text-decoration: none;
-    }
-    &:hover {
-        color: #FAA61A;
-    }
-    &.dotted {
+  }
+  &:hover {
+    color: #FAA61A;
+  }
+  &.dotted {
     /*for links*/
     color: #4b444d;
     border-bottom: 2px dotted #cccccc; }
 }
 
 
+h1 {
+  @include text(3.5em, 1.8em, bold);
+}
 
+h2 {
+  @include text(2em, 2em, bold);
+}
 
-//p,li {
-//    @include text(1.6em,2em);
-//}
+h3 {
+  @include text(1.8em, 2.2em, normal);
+}
+
+p, a {
+  @include text(1.3rem, 2rem);
+}
+
+li a {
+  @include text(1rem, 2rem);
+}
+
+.last-div {
+  margin-bottom: 300px;
+}

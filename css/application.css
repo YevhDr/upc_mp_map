@@ -1,18 +1,18 @@
-@import url("https://fonts.googleapis.com/css?family=Andika");
 html {
   position: relative;
   min-height: 100%; }
 
 body {
-  font-family: 'PT Sans', sans-serif;
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  background-color: #fff !important;
-  color: #59595C !important;
+  font-family: Open Sans, sans-serif;
+  font-size: 100%;
+  color: #383e47;
+  width: 100%;
+  /*footer height plus padding*/
+  margin-bottom: 200px;
   overflow-x: hidden; }
 
 a {
-  color: inherit;
+  color: white !important;
   text-decoration: none; }
   a:link {
     text-decoration: none; }
@@ -22,6 +22,32 @@ a {
     /*for links*/
     color: #4b444d;
     border-bottom: 2px dotted #cccccc; }
+
+h1 {
+  font-size: 3.5em;
+  line-height: 1.8em;
+  font-weight: bold; }
+
+h2 {
+  font-size: 2em;
+  line-height: 2em;
+  font-weight: bold; }
+
+h3 {
+  font-size: 1.8em;
+  line-height: 2.2em;
+  font-weight: normal; }
+
+p, a {
+  font-size: 1.3rem;
+  line-height: 2rem; }
+
+li a {
+  font-size: 1rem;
+  line-height: 2rem; }
+
+.last-div {
+  margin-bottom: 300px; }
 
 /* ======== HEADER ======== */
 .logo {
@@ -53,8 +79,8 @@ a {
   position: absolute;
   bottom: 0 !important;
   width: 100%;
-  height: 170px;
-  background: #e3e3e3 none repeat scroll 0 0;
+  height: 200px;
+  background: #383e47 none repeat scroll 0 0;
   text-align: center;
   font-size: 10px;
   padding: 0;
@@ -63,11 +89,26 @@ a {
 #footer-wraper {
   padding-top: 20px; }
 
-.copying-info {
+.copyright {
   padding-top: 20px;
-  font-size: 0.7em;
+  font-size: 1rem;
   line-height: 15px;
-  color: #888c91; }
+  color: #fff; }
+  @media (max-width: 1024px) {
+    .copyright {
+      padding-top: 20px;
+      font-size: 0.5em; } }
+  @media (max-width: 767px) {
+    .copyright {
+      padding-top: 10px; } }
+
+.copying-info {
+  text-align: left;
+  margin-left: 5%;
+  padding-top: 20px;
+  font-size: 1rem;
+  line-height: 15px;
+  color: #fff; }
   @media (max-width: 1024px) {
     .copying-info {
       padding-top: 10px;
@@ -78,7 +119,7 @@ a {
 
 .support-site:link,
 .support-site:visited {
-  color: #FAA61A; }
+  color: #FAA61A !important; }
 
 .weirdo-container {
   margin-bottom: 250px;
@@ -252,7 +293,7 @@ a {
 
 .jumbotron {
   padding-top: 10px !important;
-  background-color: #59595C !important;
+  background-color: #383e47 !important;
   background-size: cover;
   height: 100vh;
   width: 100vw; }
@@ -315,12 +356,10 @@ h2 {
   text-align: center; }
 
 ul {
-  color: red;
-  font-weight: 600;
+  text-align: left;
   font-size: 1.2em;
   list-style-type: none;
-  margin: 20px 0 10px 0 !important;
-  padding: 0 !important; }
+  padding-top: 20px; }
 
 li {
   list-style: none; }

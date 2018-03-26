@@ -29,6 +29,8 @@
     <script src="lib/bootstrap.min.js"></script>
     <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>-->
     <script src='lib/share-behavior.js'></script>
+    <script type="text/javascript" src="http://leafletjs.com/examples/map-panes/eu-countries.js"></script>
+
 
 
 </head>
@@ -76,7 +78,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid  last-div">
     <div class="row">
         <div class="col-md-offset-3 col-md-6 paragraph">
 
@@ -171,6 +173,8 @@
 
     </div>
 
+    <!--<div id='mymap'></div>-->
+
     <div class="row">
         <div class="col-md-offset-3 col-md-6 paragraph">
             <p>Як видно з карти, в трьох областях громади УПЦ МП майже відсутні. Це Львівська, Івано-Франківська і
@@ -206,14 +210,128 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-9">
-            <div id="menu"></div>
-        </div>
-    </div>
-
 
 </div>
+
+<script>
+    var mymap = L.map('mymap');
+
+    mymap.createPane('labels');
+
+    // This pane is above markers but below popups
+    mymap.getPane('labels').style.zIndex = 650;
+
+    // Layers in this pane are non-interactive and do not obscure mouse/touch events
+    mymap.getPane('labels').style.pointerEvents = 'none';
+
+
+    var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+    var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+        attribution: cartodbAttribution
+    }).addTo(mymap);
+
+    var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
+        attribution: cartodbAttribution,
+        pane: 'labels'
+    }).addTo(mymap);
+
+    geojson = L.geoJson(euCountries).addTo(mymap);
+
+    geojson.eachLayer(function (layer) {
+        layer.bindPopup(layer.feature.properties.name);
+    });
+
+    mymap.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 4);
+</script>
+
+<!--<div class="container-fluid last-div">-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-offset-2 col-md-8">-->
+            <!--<h4 style="text-align:center"><b>Читайте також</b></h4>-->
+            <!--<div class="col-sm-4 read-more">-->
+                <!--<a target="_blank" href="http://texty.org.ua/d/longs/dnipro2/"><img src="img/dnipro.png"-->
+                                                                                    <!--class="img-responsive"-->
+                                                                                    <!--alt="Вкрадений Дніпро"></a>-->
+            <!--</div>-->
+            <!--<div class="col-sm-4 read-more">-->
+                <!--<a target="_blank" href="http://texty.org.ua/d/urban-heat-web/"><img src="img/proholoda.png"-->
+                                                                                     <!--class="img-responsive"-->
+                                                                                     <!--alt="Українська бетонна пустеля"></a>-->
+            <!--</div>-->
+            <!--<div class="col-sm-4 read-more">-->
+                <!--<a target="_blank" href="http://texty.org.ua/d/static/wrack/"><img-->
+                        <!--src="img/zel-dnipro.png" class="img-responsive" alt="Зелений Дніпро"></a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<!-- Footer-->
+<footer id="footer" class="container-fluid">
+    <div id="footer-wraper" class="wraper">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 col-md-3 col-sm-3 col-xs-12">
+            <div class="copyright">
+                <p class="p1">&copy; 2018, Тексти.org.ua</p>
+                <p class="p2">Медія для розумних</p>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 col-md-3 col-sm-3 col-xs-3">
+            <ul class="links">
+                <li><a href="http://texty.org.ua/mod/article/index.php?ed=1">Вибір редакції</a>
+                    <a href="http://texty.org.ua/mod/article/?view=rss&amp;ed=1">(RSS)</a>
+                </li>
+                <li><a href="http://texty.org.ua/mod/video/">Відео</a>
+                    <a href="http://texty.org.ua/mod/video/?view=rss">(RSS)</a>
+                </li>
+                <li><a href="http://texty.org.ua/mod/article/">Статті</a>
+                    <a href="http://texty.org.ua/mod/article/?view=rss">(RSS)</a>
+                </li>
+                <li><a href="http://texty.org.ua/mod/news/">Новини</a>
+                    <a href="http://texty.org.ua/mod/news/?view=rss">(RSS)</a>
+                </li>
+                <li><a href="http://texty.org.ua/mod/blog/everyone.php">Блоги</a>
+                    <a href="http://texty.org.ua/mod/blog/blog_list.php?view=rss">(RSS)</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 col-md-3 col-sm-3 col-xs-3">
+            <ul class="links">
+                <li>
+                    <a href="http://texty.org.ua/mod/archive/tag.php?tag=%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D0%BF%D1%86%D1%96%D1%8F">Концепції</a>
+                </li>
+                <li>
+                    <a href="http://texty.org.ua/mod/archive/tag.php?tag=%D1%80%D0%B5%D1%84%D0%BE%D1%80%D0%BC%D0%B8">Реформи</a>
+                </li>
+                <li>
+                    <a href="http://texty.org.ua/mod/archive/tag.php?tag=%D0%B4%D0%BE%D1%81%D0%B2%D1%96%D0%B4">Важливий
+                        досвід</a></li>
+                <li>
+                    <a href="http://texty.org.ua/mod/archive/tag.php?tag=%D1%96%D0%BD%D0%BE%D0%B7%D0%BC%D1%96">Найцікавіше
+                        з інозмі</a></li>
+                <li><a href="http://texty.org.ua/pg/blog/infoviz">Журналістика даних</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 col-md-3 col-sm-3 col-xs-3">
+            <ul class="links">
+                <li><a href="http://texty.org.ua/mod/pages/donate.php" class="support-site">Підтримай сайт
+                    фінансово!</a></li>
+                <li><a href="http://facebook.com/texty.org.ua">Ми у Фейсбуці</a></li>
+                <li><a href="http://twitter.com/textyorgua">Ми у Твітері</a></li>
+                <li><a href="http://texty.org.ua/pg/pages/view/22">Про нас</a></li>
+                <li><a href="http://texty.org.ua/mod/archive/">Архів</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="copying-info">
+                Матеріали ТЕКСТИ.org.ua можна поширювати згідно з ліцензією Creative Commons з обов’язковим
+                посиланням.
+                Велике прохання ставити гіперпосилання в першому чи другому абзаці вашого матеріалу.
+            </div>
+        </div>
+    </div>
+</footer>
 
 
 <!--<script src='js/leaflet_map.js'></script>-->

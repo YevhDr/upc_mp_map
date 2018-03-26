@@ -43,6 +43,9 @@ var ukraine = {
 
 
 var map = new L.Map('map');
+map.createPane('labels');
+map.getPane('labels').style.zIndex = 650;
+map.getPane('labels').style.pointerEvents = 'none';
 
 var lat = 49;
 var lng = 32;
@@ -51,7 +54,7 @@ var zoom = 6;
 
 var osmUrl = 'https://api.mapbox.com/styles/v1/evgeshadrozdova/cjcb287ab1cyf2smtu3om56w8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ';
 var osmAttrib = 'Map data &copy; OpenStreetMap contributors';
-var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 20, zoomSnap: 0.5, attribution: osmAttrib});
+var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 20, zoomSnap: 0.5, attribution: osmAttrib, pane: 'labels'});
 map.addLayer(osm);
 
 map.setView(new L.LatLng(lat, lng), zoom).scrollWheelZoom.disable();
