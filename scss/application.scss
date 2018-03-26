@@ -64,9 +64,9 @@ h1 {
   @media #{$brk-xlarge},
   #{$brk-large},
   #{$brk-medium}  {
-    margin-top:15vh!important;
+    margin-top:10vh!important;
     font-size: 5vw!important;
-    line-height: 5vw!important;
+    line-height: 5.5vw!important;
   }
   @media #{$brk-narrow} {
     margin-top:5vh!important;
