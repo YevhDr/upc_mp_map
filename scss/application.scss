@@ -26,9 +26,15 @@
     height: 100vh;
   }
 
-  @media #{$brk-spnarrow} {
+  @media #{$brk-spnarrow} and (orientation: portrait) {
     height: 60vh;
   }
+
+  @media screen and (min-device-width: 768px) and (max-device-width: 1824px) and (orientation : landscape){
+    height: 100vh;
+  }
+
+
 
 }
 
