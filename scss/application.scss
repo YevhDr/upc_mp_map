@@ -81,12 +81,14 @@ h1 {
 }
 
 h2 {
-  font-size: 3rem!important;
-  line-height: 5rem!important;
+  text-align: left!important;
+  font-size: 2rem!important;
+  line-height: 2rem!important;
   font-weight: 700!important;
   margin-top: 30px!important;
-  margin-bottom: 30px!important;
-  padding: 5px;
+  margin-left: 0!important;
+  margin-bottom: 15px!important;
+
 }
 
 h3 {
@@ -94,7 +96,7 @@ h3 {
   font-size: 1.5rem!important;
   line-height: 2.7rem!important;
   font-weight: 800!important;
-  text-align: justify;
+  text-align: left;
   //background-color: #dfe0e2;
 }
 

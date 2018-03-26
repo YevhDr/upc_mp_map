@@ -52,6 +52,18 @@
       padding-top: 10px;
     }
 }
+
+.links {
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+   display: block;
+  }
+  @media #{$brk-narrow},
+  #{$brk-spnarrow} {
+    display: none;
+  }
+}
 .support-site:link,
 .support-site:visited {
     color:$orange!important;
