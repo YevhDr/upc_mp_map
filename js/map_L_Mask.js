@@ -54,8 +54,10 @@ var zoom = 6;
 
 var osmUrl = 'https://api.mapbox.com/styles/v1/evgeshadrozdova/cjcb287ab1cyf2smtu3om56w8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ';
 var osmAttrib = 'Map data &copy; OpenStreetMap contributors';
-var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 20, zoomSnap: 0.5, attribution: osmAttrib, pane: 'labels'});
-map.addLayer(osm);
+var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 20, zoomSnap: 0.5, attribution: osmAttrib}).addTo(map);
+
+
+var labels = new L.TileLayer('https://api.mapbox.com/styles/v1/evgeshadrozdova/cjf8em7uq3qwq2rpbdrtpvda6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ', {minZoom: 4, maxZoom: 20, zoomSnap: 0.5, attribution: osmAttrib, pane: 'labels'}).addTo(map);
 
 map.setView(new L.LatLng(lat, lng), zoom).scrollWheelZoom.disable();
 
@@ -69,11 +71,8 @@ for (i = 0; i < coordinates.length; i++) {
 L.mask(latLngs).addTo(map);
 
 
+
 d3.csv("data/upc_mp_geocoded.csv", function (data) {
-
-     
-
-    
 
         for (i = 0; i < data.length; i++) { //rich nested data inside d.orgs
 
@@ -96,36 +95,13 @@ d3.csv("data/upc_mp_geocoded.csv", function (data) {
             circle.setRadius(circle.getRadius() * 2);
             circle.bindPopup(data[i].NAME + "<br><br>" +  data[i].ADDRESS ).openPopup().addTo(map);
 
+        }
 
-            // circle.on('mouseover', function(e){
-            //     marker.openPopup();
-            // });[data[i].ADDRESS]
-
-        } //--------end of points' draw
-
-
-
-    // map.on('zoomend', function() {
-    //     var currentZoom = map.getZoom();
-    //     circle.setRadius(currentZoom);
-    // });
-
-
-    // });
-
- 
-
-   
-});
+   });
 
 
 
 
-Array.prototype.contains = function (v) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] === v) return true;
-    }
-    return false;
-};
+
 
 

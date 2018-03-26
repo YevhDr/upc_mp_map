@@ -42,28 +42,30 @@
         <div class="col-lg-2 col-md-2 col-sm-2  col-xs-4">
             <a href="http://texty.org.ua"><img class="img-responsive logo" src="img/logo.png"></a>
         </div>
-        <div class="col-lg-1 col-lg-offset-10 col-md-1 col-md-offset-10 col-sm-2 col-sm-offset-9 col-xs-2 col-xs-offset-6">
+        <div class="col-lg-1 col-lg-offset-10 col-md-1 col-md-offset-10 col-sm-2 col-sm-offset-9 col-xs-2 col-xs-offset-9">
             <div class="social-icons">
                 <a href="https://twitter.com/intent/tweet?text=http://texty.org.ua/....."
                    class="share-btn"><i
-                        class="fa fa-twitter fa-fw fa-2x social-tw"></i></a>
+                        class="fa fa-twitter fa-fw social-tw"></i></a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=http://texty.org.ua/....."
                    class="share-btn"><i
-                        class="fa fa-facebook fa-fw fa-2x social-fb"></i></a>
+                        class="fa fa-facebook fa-fw social-fb"></i></a>
             </div>
         </div>
     </div>
 </div>
 <div class="jumbotron">
-    <div class="col-md-12">
-        <h1>З яким бізнесом повʼязані релігійні <br> громади УПЦ МП
+    <div id="inner-box"></div>
+    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-3">
+        <h1>З яким бізнесом повʼязані релігійні громади УПЦ МП
+
         </h1>
     </div>
 </div>
 
 
 <div class="container-fluid">
-    <div class="col-md-offset-3 col-md-6">
+    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6">
         <h3>Якщо у Вашому житті щось не клеїться, Ви завжди можете звернутись до Бога... або ж до його посередників на
             землі. Вони допоможуть очистити душу від гріхів, а також побудувати, продати, купити дім, прокласти
             комунікації до нього, перевезти речі, нагодують, полікують, доглянуть на схилі літ. Небайдужі до політики?
@@ -80,7 +82,7 @@
 
 <div class="container-fluid  last-div">
     <div class="row">
-        <div class="col-md-offset-3 col-md-6 paragraph">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 paragraph">
 
             <p><span>Згідно з Законом “Про свободу совісті та релігійні організації”, релігійна громада — це місцева релігійна організація віруючих громадян, які добровільно об'єдналися з метою спільного задоволення релігійних потреб. Для реєстрації релігійної організації необхідно щонайменше 10 осіб. Громада не зобовʼязана повідомляти державу про утворення, проте реєстрація (набуття статусу юридичної особи) необхідна, якщо вона планує володіти майном, підписувати угоди. На загальних зборах громади ухвалюють рішення про обрання керівника. Часто керівниками релігійних громад є священики, але це не обовʼязково. </span>
             </p>
@@ -176,7 +178,7 @@
     <!--<div id='mymap'></div>-->
 
     <div class="row">
-        <div class="col-md-offset-3 col-md-6 paragraph">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 paragraph">
             <p>Як видно з карти, в трьох областях громади УПЦ МП майже відсутні. Це Львівська, Івано-Франківська і
                 Тернопільська області. Але помітно мала кількість в зазначених областях компенсується в сусідніх
                 регіонах — Волинській, Рівненській, Хмельницькій, Закарпатській, Чернівецькій областях.</p>
@@ -213,37 +215,7 @@
 
 </div>
 
-<script>
-    var mymap = L.map('mymap');
 
-    mymap.createPane('labels');
-
-    // This pane is above markers but below popups
-    mymap.getPane('labels').style.zIndex = 650;
-
-    // Layers in this pane are non-interactive and do not obscure mouse/touch events
-    mymap.getPane('labels').style.pointerEvents = 'none';
-
-
-    var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
-
-    var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-        attribution: cartodbAttribution
-    }).addTo(mymap);
-
-    var positronLabels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png', {
-        attribution: cartodbAttribution,
-        pane: 'labels'
-    }).addTo(mymap);
-
-    geojson = L.geoJson(euCountries).addTo(mymap);
-
-    geojson.eachLayer(function (layer) {
-        layer.bindPopup(layer.feature.properties.name);
-    });
-
-    mymap.setView({ lat: 47.040182144806664, lng: 9.667968750000002 }, 4);
-</script>
 
 <!--<div class="container-fluid last-div">-->
     <!--<div class="row">-->

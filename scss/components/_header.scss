@@ -12,16 +12,22 @@
   position: fixed;
   padding-top: 10px;
   z-index: 1000;
+
+}
+
+.fa {
+  font-size: 20px!important;
 }
 
 .fa-twitter,
 .fa-facebook {
   background-color:rgba(187, 189, 192, 0.9);
-  padding: 5px;
+  padding: 3px;
   color: #5b5b5b;
   float: right;
-  margin: 5px 10px 0px 0px;
+  margin: 5px 10px 0 0;
   cursor: pointer;
+  border-radius: 5px;
   &:hover{
     color: $orange;
   }

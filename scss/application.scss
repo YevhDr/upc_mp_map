@@ -14,10 +14,41 @@
 .jumbotron {
   padding-top:10px!important;
   background-color: $main-text !important;
-  background-size:cover;
   height: 100vh;
   width:100vw;
+  background-image: url(../img/pic_church.jpg);
+  background-position: center;
+  background-size: cover;
 
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    height: 100vh;
+  }
+
+  @media #{$brk-spnarrow} {
+    height: 60vh;
+  }
+
+}
+
+#inner-box {
+  background: black;
+  width: 100vw;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  position: absolute;
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    height: 100vh;
+    display: none;
+  }
+  @media #{$brk-spnarrow} {
+    height: 60vh;
+    display: block;
+  }
 }
 
 img.img {
@@ -26,15 +57,27 @@ img.img {
 }
 
 h1 {
-  margin-top:25vh!important;
-  font-size: 7rem!important;
-  text-align: center!important;
-  line-height: 4rem;
+  margin-left: 10%!important;
+  text-align: left!important;
   font-weight: 800!important;
-  //margin: 20px 0 50px 0!important;
-  //padding: 20px;
   color:$white!important;
-
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    margin-top:15vh!important;
+    font-size: 5vw!important;
+    line-height: 5vw!important;
+  }
+  @media #{$brk-narrow} {
+    margin-top:5vh!important;
+    font-size: 5vw!important;
+    line-height: 5vw!important;
+  }
+  @media #{$brk-spnarrow} {
+    margin-top: 20vh!important;
+    font-size: 8vw!important;
+    line-height: 9vw!important;
+  }
 }
 
 h2 {
@@ -44,8 +87,6 @@ h2 {
   margin-top: 30px!important;
   margin-bottom: 30px!important;
   padding: 5px;
-
-  //border: 0.25px white solid!important;
 }
 
 h3 {
@@ -68,6 +109,9 @@ h5 {
   line-height: 2.5rem;
   text-align:left;
   margin-bottom: 20px;
+  @media #{$brk-spnarrow} {
+
+  }
 }
 
 p span {
@@ -158,5 +202,9 @@ table {
   color: #333;
   opacity:0.8;
   box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+}
+
+.leaflet-bar a {
+  background-color: #d1d1d1 !important;
 }
 
