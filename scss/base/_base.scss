@@ -3,12 +3,14 @@ html {
     min-height: 100%;
 }
 
+$background-color:#59595C;
+
 body {
     //font-family: 'Andika', sans-serif!important;
     font-family: 'PT Sans', sans-serif;
     margin: 0 0 0 0;
     padding:0 0 0 0;
-    background-color: #59595C!important;
+    background-color: $background-color!important;
     color: #ecedef !important;
     overflow-x: hidden;
 }
