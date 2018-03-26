@@ -7,8 +7,8 @@ body {
   font-family: 'PT Sans', sans-serif;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
-  background-color: #59595C !important;
-  color: #ecedef !important;
+  background-color: #fff !important;
+  color: #59595C !important;
   overflow-x: hidden; }
 
 a {
@@ -255,20 +255,19 @@ a {
   background-color: #59595C !important;
   background-size: cover;
   height: 100vh;
-  width: 100vw;
-  margin-top: 25vh; }
+  width: 100vw; }
 
 img.img {
   width: 100%;
   margin: 50px 0 50px 0; }
 
 h1 {
+  margin-top: 25vh !important;
   font-size: 7rem !important;
   text-align: center !important;
   line-height: 4rem;
   font-weight: 800 !important;
-  margin: 20px 0 50px 0 !important;
-  padding: 20px; }
+  color: #fff !important; }
 
 h2 {
   font-size: 3rem !important;
@@ -291,7 +290,7 @@ h5 {
   color: white !important; }
 
 .paragraph {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   line-height: 2.5rem;
   text-align: left;
   margin-bottom: 20px; }
@@ -337,8 +336,8 @@ text:active, text:focus {
 
 .description {
   font-size: calc(16px * 0.5vw) !important;
+  margin-left: 5%;
   margin-right: 5%;
-  text-align: right;
   margin-top: 10px;
   margin-bottom: 10px; }
 

@@ -15,11 +15,9 @@
   padding-top:10px!important;
   background-color: $background-color !important;
   background-size:cover;
-  //margin-top: 30vh;
   height: 100vh;
   width:100vw;
-  margin-top:25vh;
-  //margin-left: 30vw;
+
 }
 
 img.img {
@@ -28,14 +26,15 @@ img.img {
 }
 
 h1 {
+  margin-top:25vh!important;
   font-size: 7rem!important;
   text-align: center!important;
   line-height: 4rem;
   font-weight: 800!important;
-  margin: 20px 0 50px 0!important;
-  padding: 20px;
+  //margin: 20px 0 50px 0!important;
+  //padding: 20px;
+  color:$text-color!important;
 
-  //background-color: #dfe0e2;
 }
 
 h2 {
@@ -65,7 +64,7 @@ h5 {
 }
 
 .paragraph {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   line-height: 2.5rem;
   text-align:left;
   margin-bottom: 20px;
@@ -124,8 +123,8 @@ text:active, text:focus {
 
 .description {
   font-size: calc(16px * 0.5vw)!important;
+  margin-left: 5%;
   margin-right: 5%;
-  text-align: right;
   margin-top:10px;
   margin-bottom: 10px;
 }
