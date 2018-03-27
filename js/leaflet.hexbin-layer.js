@@ -8,7 +8,7 @@ L.HexLayer = L.Class.extend({
         minZoom: 0,
         maxZoom: 18,
         padding: 100,
-        radius: 10
+        radius: 8
     },
 
     initialize: function (data, options) {
@@ -51,7 +51,6 @@ L.HexLayer = L.Class.extend({
     _initContainer: function () {
         var overlayPane = this._map.getPanes().overlayPane;
         if (!this._container || overlayPane.empty) {
-            // TODO: Add optional ID attribute in the case of multiple layers.
             this._container = d3.select(overlayPane)
                 .append('svg').attr('class', 'leaflet-layer leaflet-zoom-hide');
         }

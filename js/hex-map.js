@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 /* ----- HEXAGON'S CODE -----*/
 (function () {
     var max, scale,
@@ -17,9 +6,7 @@
         container = L.DomUtil.get('quake'),
         map = L.map(container).setView([49, 32], 6);
 
-    // L.tileLayer('https://api.mapbox.com/styles/v1/evgeshadrozdova/cjcb287ab1cyf2smtu3om56w8/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ', {
-    //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    // }).addTo(map);
+
 
 
 
@@ -54,6 +41,66 @@
         L.hexLayer(collection, {
             applyStyle: hex_style
         }).addTo(map);
+
+
+
+
+
+        map.on('click', function(e) {
+
+
+
+            // var locate = L.control.locate().addTo(map);
+
+
+           map.setView(e.latlng, 7);
+
+            for (i = 0; i < coffee.length; i++) {
+                    coffee[i].Latitude = +coffee[i].Latitude;
+                    coffee[i].Longitude = +coffee[i].Longitude;
+
+                    var circle =  L.circleMarker([coffee[i].Latitude, coffee[i].Longitude], {
+                        radius: 5,
+                        color: '#8d8d8d',
+                        weight: 0.5,
+                        fillColor: 'rgb(153,216,201)',
+                        fillOpacity: 0.8,
+                        riseOnHover: true,
+                        className: 'point'
+                    });
+
+                     circle
+                         .bindPopup(coffee[i].NAME + "<br><br>" +  coffee[i].ADDRESS)
+                         // .openPopup()
+                         .addTo(map);
+
+
+                }
+            // L.tileLayer('https://api.mapbox.com/styles/v1/evgeshadrozdova/cjf8em7uq3qwq2rpbdrtpvda6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ', {
+            //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            // }).addTo(map);
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     });
 
     /**
@@ -69,7 +116,7 @@
         if (!(max && scale)) {
             max = d3.max(hexagons.data(), function (d) { return d.length; });
             scale = d3.scale.quantize()
-                .domain([0, 40])
+                .domain([0, 50])
                 .range(d3.range(classes));
         }
 

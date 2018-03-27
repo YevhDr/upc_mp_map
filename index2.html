@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />-->
+    <!--<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>-->
     <style>
 
         html, body { margin: 0; padding: 0; height: 100%; }
@@ -12,7 +14,14 @@
             /*width: 80vw;*/
             background-color: #ecedef
         }
-        .hexagon { opacity: 0.7 }
+        .hexagon {
+            opacity: 0.7
+        }
+
+        .leaflet-container {
+            cursor: pointer!important;
+
+        }
     </style>
     <script type="text/javascript">
         var _gaq = _gaq || [];
@@ -31,12 +40,14 @@
 <div id='quake'></div>
 
 <script src="lib/d3.min.js"></script>
+<script src="lib/jquery-2.1.4.min.js"></script>
 <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
 <script src="http://projects.delimited.io/experiments/hexbins/lib/simple_statistics.js"></script>
 <script type="text/javascript" src="js/colorbrewer.js"></script>
 <script type="text/javascript" src="js/leaflet.hexbin-layer.js"></script>
-<script type="text/javascript" src="js/hex-map.js">
+<script type="text/javascript" src="js/hex-map.js"></script>
 
-</script>
+
+
 </body>
 </html>

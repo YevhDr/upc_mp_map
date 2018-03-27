@@ -2,7 +2,7 @@
 L.Mask = L.Polygon.extend({
     options: {
         stroke: false,
-        color: '#383e47',
+        color: '#59595C',
         fillOpacity: 1,
         clickable: true,
 
@@ -83,7 +83,7 @@ d3.csv("data/upc_mp_geocoded.csv", function (data) {
                radius: 1400,
                color: '#8d8d8d',
                weight: 0.5,
-               fillColor: '#f8a603',
+               fillColor: 'rgb(153,216,201)',
                fillOpacity: 0.8,
                riseOnHover: true
 

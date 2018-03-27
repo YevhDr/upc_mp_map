@@ -174,11 +174,6 @@ text:active, text:focus {
   margin-bottom: 10px;
 }
 
-.point {
-  color: #8d8d8d;
-}
-
-
 
 table {
   margin-top:40px;
@@ -212,7 +207,11 @@ table {
   background-color: #d1d1d1 !important;
 }
 
+/* Change cursor when mousing over clickable layer */
+.leaflet-container {
+  cursor: crosshair!important;
 
+}
 /*---experiment--- */
 
 
