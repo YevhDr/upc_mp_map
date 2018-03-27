@@ -6,11 +6,6 @@
 @import "components/weirdo";
 
 
-
-.container {
-  //margin-top:30px;
-}
-
 .jumbotron {
   padding-top:10px!important;
   background-color: $main-text !important;
@@ -26,11 +21,14 @@
     height: 100vh;
   }
 
-  @media #{$brk-spnarrow} and (orientation: portrait) {
+  @media #{$brk-spnarrow}
+  and (orientation: portrait) {
     height: 60vh;
   }
 
-  @media screen and (min-device-width: 768px) and (max-device-width: 1824px) and (orientation : landscape){
+  @media screen and (min-device-width: 768px)
+  and (max-device-width: 1824px)
+  and (orientation : landscape){
     height: 100vh;
   }
 
@@ -51,8 +49,14 @@
     height: 100vh;
     display: none;
   }
-  @media #{$brk-spnarrow} {
+  @media #{$brk-spnarrow}
+  and (orientation: portrait) {
+    display:block;
     height: 60vh;
+  }
+  @media #{$brk-spnarrow}
+  and (orientation: landscape) {
+    height: 100vh;
     display: block;
   }
 }
@@ -63,6 +67,8 @@ img.img {
 }
 
 h1 {
+  font-family: 'Andika', sans-serif!important;
+  letter-spacing: 1px;
   margin-left: 10%!important;
   text-align: left!important;
   font-weight: 800!important;
@@ -75,7 +81,7 @@ h1 {
     line-height: 5.5vw!important;
   }
   @media #{$brk-narrow} {
-    margin-top:5vh!important;
+    margin-top:15vh!important;
     font-size: 5vw!important;
     line-height: 5vw!important;
   }
@@ -109,7 +115,7 @@ h3 {
 h5 {
   text-align: right;
   margin-bottom: 40px!important;
-  color: white!important;
+  color: $main-text!important;
 }
 
 .paragraph {

@@ -23,29 +23,6 @@ a {
     color: #4b444d;
     border-bottom: 2px dotted #cccccc; }
 
-h1 {
-  font-size: 3.5em;
-  line-height: 1.8em;
-  font-weight: bold; }
-
-h2 {
-  font-size: 2em;
-  line-height: 2em;
-  font-weight: bold; }
-
-h3 {
-  font-size: 1.8em;
-  line-height: 2.2em;
-  font-weight: normal; }
-
-p, a {
-  font-size: 1.3rem;
-  line-height: 2rem; }
-
-li a {
-  font-size: 1rem;
-  line-height: 2rem; }
-
 .last-div {
   margin-bottom: 300px; }
 
@@ -330,9 +307,13 @@ li a {
     #inner-box {
       height: 100vh;
       display: none; } }
-  @media (max-width: 767px) {
+  @media (max-width: 767px) and (orientation: portrait) {
     #inner-box {
-      height: 60vh;
+      display: block;
+      height: 60vh; } }
+  @media (max-width: 767px) and (orientation: landscape) {
+    #inner-box {
+      height: 100vh;
       display: block; } }
 
 img.img {
@@ -340,6 +321,8 @@ img.img {
   margin: 50px 0 50px 0; }
 
 h1 {
+  font-family: "Andika", sans-serif !important;
+  letter-spacing: 1px;
   margin-left: 10% !important;
   text-align: left !important;
   font-weight: 800 !important;
@@ -351,7 +334,7 @@ h1 {
       line-height: 5.5vw !important; } }
   @media (max-width: 1024px) {
     h1 {
-      margin-top: 5vh !important;
+      margin-top: 15vh !important;
       font-size: 5vw !important;
       line-height: 5vw !important; } }
   @media (max-width: 767px) {
@@ -379,7 +362,7 @@ h3 {
 h5 {
   text-align: right;
   margin-bottom: 40px !important;
-  color: white !important; }
+  color: #383e47 !important; }
 
 .paragraph {
   font-size: 1.5rem;
