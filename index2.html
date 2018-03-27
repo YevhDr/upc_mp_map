@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+    <style>
+
+        html, body { margin: 0; padding: 0; height: 100%; }
+        #quake {
+            height: 100vh;
+            /*width: 80vw;*/
+            background-color: #ecedef
+        }
+        .hexagon { opacity: 0.7 }
+    </style>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-45101494-1']);
+        _gaq.push(['_setDomainName', 'delimited.io']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
+<body>
+
+<div id='quake'></div>
+
+<script src="lib/d3.min.js"></script>
+<script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+<script src="http://projects.delimited.io/experiments/hexbins/lib/simple_statistics.js"></script>
+<script type="text/javascript" src="js/colorbrewer.js"></script>
+<script type="text/javascript" src="js/leaflet.hexbin-layer.js"></script>
+<script type="text/javascript" src="js/hex-map.js">
+
+</script>
+</body>
+</html>

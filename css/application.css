@@ -82,9 +82,13 @@ a {
     .copyright {
       padding-top: 10px; } }
 
+.p1, .p2 {
+  text-align: left;
+  margin-left: 25px; }
+
 .copying-info {
   text-align: left;
-  margin-left: 5%;
+  margin-left: 25px;
   padding-top: 20px;
   font-size: 1rem;
   line-height: 15px;
@@ -97,12 +101,23 @@ a {
     .copying-info {
       padding-top: 10px; } }
 
-@media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
-  .links {
-    display: block; } }
-@media (max-width: 1024px), (max-width: 767px) {
-  .links {
-    display: none; } }
+ul {
+  text-align: left;
+  list-style-type: none;
+  padding-top: 20px; }
+
+li {
+  list-style: none; }
+
+.links {
+  font-size: 1.2em;
+  line-height: 1.7em; }
+  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
+    .links {
+      display: block; } }
+  @media (max-width: 1024px), (max-width: 767px) {
+    .links {
+      display: none; } }
 
 .support-site:link,
 .support-site:visited {
@@ -389,15 +404,6 @@ h2 {
   font-size: 1.5rem;
   text-align: center; }
 
-ul {
-  text-align: left;
-  font-size: 1.2em;
-  list-style-type: none;
-  padding-top: 20px; }
-
-li {
-  list-style: none; }
-
 .fa .fa-square {
   color: #515661; }
 
@@ -440,5 +446,7 @@ table {
 
 .leaflet-bar a {
   background-color: #d1d1d1 !important; }
+
+/*---experiment--- */
 
 /*# sourceMappingURL=application.css.map */

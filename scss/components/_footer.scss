@@ -36,9 +36,14 @@
   }
 }
 
+.p1, .p2 {
+  text-align: left;
+  margin-left: 25px;
+}
+
 .copying-info {
     text-align: left;
-    margin-left: 5%;
+    margin-left: 25px;
     padding-top: 20px;
     font-size: $footer-size;
     line-height: 15px;
@@ -53,7 +58,19 @@
     }
 }
 
+ul {
+  text-align: left;
+  list-style-type: none;
+  padding-top: 20px;
+}
+
+li {
+  list-style: none;
+}
+
 .links {
+  font-size:1.2em;
+  line-height: 1.7em;
   @media #{$brk-xlarge},
   #{$brk-large},
   #{$brk-medium}  {
@@ -64,6 +81,9 @@
     display: none;
   }
 }
+
+
+
 .support-site:link,
 .support-site:visited {
     color:$orange!important;
