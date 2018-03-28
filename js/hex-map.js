@@ -115,7 +115,7 @@
                     tooltip.css('display', 'none', 'important');
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
-                    description.html('одна точка позначає одну громаду, аби подивитись назву і адресу громади, натисність на неї');
+                    description.html('одна точка позначає одну громаду, аби подивитись назву і адресу громади, натисність на позначку');
                     break;
 
 
