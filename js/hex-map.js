@@ -54,7 +54,7 @@
 
 
         L.circle([49.5, 24.5], 100000, {
-            color: 'red',
+            color: 'white',
             fill: false,
             weight: 1,
             className: 'annotate'
@@ -159,7 +159,7 @@
                          .addTo(pointsLayer);
                 }
 
-        
+
 
 map.on('click', function(e) {
         map.setView(e.latlng, 7);
