@@ -64,7 +64,32 @@
 img.img {
   width:100%;
   margin: 50px 0 50px 0;
+
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    display:block;
+  }
+  @media #{$brk-narrow},
+  #{$brk-spnarrow}{
+    display:none;
+  }
 }
+
+img.img-m {
+  width:100%;
+  margin: 50px 0 50px 0;
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    display:none;
+  }
+  @media #{$brk-narrow},
+  #{$brk-spnarrow}{
+    display:block;
+  }
+}
+
 
 h1 {
   font-family: 'Andika', sans-serif!important;
@@ -183,11 +208,12 @@ table {
   display:flex;
 }
 
+.leaflet-map {
+  margin: 50px 0 50px 0;
+}
 
 #quake {
   height: 50vw;
-  /*width: 80vw;*/
-  margin: 50px 0 50px 0;
   background-color: white;
 }
 

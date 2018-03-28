@@ -160,27 +160,14 @@
                 }
 
 
-
 map.on('click', function(e) {
         map.setView(e.latlng, 7);
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if (map.scrollWheelZoom) {
+            map.scrollWheelZoom.disable();
+        }
 
 
     });
