@@ -2,7 +2,7 @@
 (function () {
     var max, scale,
         classes = 9,
-        scheme = colorbrewer["BuGn"][classes],
+        scheme = colorbrewer["YlOrRd"][classes],
         container = L.DomUtil.get('quake'),
         map = L.map(container).setView([49, 32], 6);
 
@@ -54,7 +54,7 @@
 
 
         L.circle([49.5, 24.5], 100000, {
-            color: 'white',
+            color: '#59595C',
             fill: false,
             weight: 1,
             className: 'annotate'
@@ -139,8 +139,8 @@
                         radius: 5,
                         color: '#8d8d8d',
                         weight: 0.5,
-                        fillColor: 'rgb(153,216,201)',
-                        fillOpacity: 0.8,
+                        fillColor: '#FAA61A',
+                        fillOpacity: 0.6,
                         riseOnHover: true,
                         className: 'point'
                     });

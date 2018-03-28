@@ -5,8 +5,6 @@
     <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700" rel="stylesheet">
-    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />-->
-    <!--<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>-->
     <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css' rel='stylesheet' />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js'></script>
     <style>
@@ -21,18 +19,19 @@
             font-family: 'Lato', sans-serif!important;
 
         }
+
         #quake {
             height: 100vh;
             /*width: 80vw;*/
             background-color: #59595B
         }
+
         .hexagon {
             opacity: 0.7
         }
 
         .leaflet-container {
             cursor: pointer!important;
-
         }
 
         .leaflet-popup-content-wrapper, .map-legends, .map-tooltip {
@@ -54,9 +53,12 @@
             box-shadow: none;
         }
 
+        /* remove popup triangle*/
         .leaflet-popup-tip {
-            border: 0px;
+            border: 0;
         }
+
+        /* create new popup background for zoom-7*/
         .custom {
             background: rgba(255, 255, 255, 0.8);
             border-radius: 5px;

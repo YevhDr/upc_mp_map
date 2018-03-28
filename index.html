@@ -8,27 +8,17 @@
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Andika&amp;subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
-    <link rel="stylesheet" href="css/application.css"/>
+
+    <script src="lib/jquery-2.1.4.min.js"></script>
 
 
     <!--Libraries styles-->
-    <link rel="stylesheet" href="css/leaflet.css"/>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700" rel="stylesheet">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css' rel='stylesheet' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/leaflet.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-    <!--Libraries scripts-->
-    <script src="lib/leaflet.js"></script>
-    <script src="lib/leaflet-src.js"></script>
-    <script src="lib/jquery-2.1.4.min.js"></script>
-    <script src="lib/d3.min.js"></script>
-    <script src="lib/d3.tip.v0.6.3.js"></script>
-    <!--<script src="http://bl.ocks.org/ZJONSSON/raw/3918369/d3.legend.js"></script>-->
-
-    <script src="lib/bootstrap.min.js"></script>
-    <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>-->
-    <script src='lib/share-behavior.js'></script>
+    <link rel="stylesheet" href="css/application.css"/>
 </head>
 
 <body>
@@ -165,7 +155,8 @@
         <div class="col-md-12 leaflet-map">
             <p class="description" style="text-align: left;">Клікніть на точку, аби подивитись назву і адресу. <br/> На мапі відсутні 162 релігійних громади, адреси яких не вдалось
                 розпізнати сервісам геокодування Google</p>
-            <div class='custom-popup' id='map'></div>
+            <div id='quake'></div>
+            <!--<div class='custom-popup' id='map'></div>-->
             <p class="description" style="text-align: right;"></p>
             <!--<div id="bubbles"></div>-->
         </div>
@@ -302,7 +293,22 @@
     </div>
 </footer>
 
-<script src='js/map_L_Mask.js'></script>
+<!--<script src='js/map_L_Mask.js'></script>-->
+<!--<script src="lib/leaflet.js"></script>-->
+<!--<script src="lib/leaflet-src.js"></script>-->
+
+<script src="lib/d3.min.js"></script>
+<script src="lib/d3.tip.v0.6.3.js"></script>
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js'></script>
+<script src="lib/bootstrap.min.js"></script>
+<script src='lib/share-behavior.js'></script>
+<script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+<script src="http://projects.delimited.io/experiments/hexbins/lib/simple_statistics.js"></script>
+<script type="text/javascript" src="js/colorbrewer.js"></script>
+<script type="text/javascript" src="js/leaflet.hexbin-layer.js"></script>
+<script type="text/javascript" src="js/hex-map.js"></script>
+
 
 <script>
     $(window).scroll(function (e) {
