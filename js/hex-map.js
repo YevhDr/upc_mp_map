@@ -8,13 +8,16 @@
 
 
 
-
+    var pointsLayer = L.layerGroup();
+    var hex = L.layerGroup();
 
 
 
     // Async call for data. Source URL is loaded from container element's
     // 'data-source' attribute.
     d3.csv('data/upc_mp_geocoded.csv', function (error, coffee) {
+        var zoomLevel = map.getZoom();
+        console.log(zoomLevel);
 
         function reformat (array) {
             var data = [];
@@ -38,22 +41,95 @@
 
 
 
+
+
+
         L.hexLayer(collection, {
             applyStyle: hex_style
         }).addTo(map);
+        //
+        // hex.addTo(map);
 
 
 
 
+        L.circle([49.5, 24.5], 100000, {
+            color: 'red',
+            fill: false,
+            weight: 1,
+            className: 'annotate'
+        }).addTo(map);
 
-        map.on('click', function(e) {
+
+        var textNode = d3.select('path.annotate').node(),  // DOM node
+            parentNode = textNode.parentNode,
+            parentParentNode = parentNode.parentNode;
+
+
+        var popup = L.popup({
+            maxWidth : 560,
+            closeButton: false,
+            autoClose: false
+
+        })
+            .setLatLng([49.5, 22.5])
+            .setContent('<p class="changeSizeTip">Галичина<br/> - єдиний<br/>регіон,<br/>де майже<br/>немає<br/>УПЦ МП</p>')
+            .openOn(map);
 
 
 
-            // var locate = L.control.locate().addTo(map);
+        map.on('zoomend', function () {
+            var zoomLevel = map.getZoom();
+            console.log(zoomLevel);
+
+            var poppUp = $('#quake > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div');
+            var hexagons = $('.hexagon')
+            var bigCircle = $('.annotate');
+            var tooltip = $('.changeSizeTip');
+            var popupBackgroundColor = $('.custom-popup');
+           
+            switch (zoomLevel) {
+                case 6:
+                    hexagons.css('display', 'block', 'important');
+                    map.removeLayer(pointsLayer);
+                    tooltip.css('display', 'block', 'important');
+                    tooltip.css('font-size', 13, 'important');
+                    tooltip.css('line-height', '15px', 'important');
+                    bigCircle.css('display', 'block', 'important');
+                    break;
+                case 7:
+                    hexagons.css('display', 'none', 'important');
+                    map.removeLayer(hex);
+                    pointsLayer.addTo(map);
+                    bigCircle.css('display', 'none', 'important');
+                    tooltip.css('display', 'none', 'important');
+                    tooltip.css('line-height', '25px', 'important');
+                    popupBackgroundColor.css('background', 'white');
+                    popupBackgroundColor.css('opacity', '0.8');
+                    break;
+                case 8:
+                    // pointsLayer.addTo(map);
+                    // tooltip.css('display', 'none', 'important');
+                    break;
+
+                default:
+                    pointsLayer.addTo(map);
+                    tooltip.css('font-size', 13, 'important');
+                    tooltip.css('line-height', '15px', 'important');
+
+            }
+        });
+
+        var osmUrl='https://api.mapbox.com/styles/v1/evgeshadrozdova/cjfaw65ou7as82rp9ebb43532/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ';
+        var osmAttrib='Map data &copy; OpenStreetMap contributors';
+        var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 7, attribution: osmAttrib});
+
+        var miniMap = new L.Control.MiniMap(osm).addTo(map);
+
+        
+        
 
 
-           map.setView(e.latlng, 7);
 
             for (i = 0; i < coffee.length; i++) {
                     coffee[i].Latitude = +coffee[i].Latitude;
@@ -69,19 +145,25 @@
                         className: 'point'
                     });
 
+                var customOptions =
+                {
+                    'className' : 'custom'
+                    
+                };
+
                      circle
-                         .bindPopup(coffee[i].NAME + "<br><br>" +  coffee[i].ADDRESS)
+                         // .bindPopup(coffee[i].NAME + "<br><br>" +  coffee[i].ADDRESS)
+                         // .bindPopup(coffee[i].NAME)
+                         .bindPopup(coffee[i].ADDRESS, customOptions)
                          // .openPopup()
-                         .addTo(map);
-
-
+                         .addTo(pointsLayer);
                 }
-            // L.tileLayer('https://api.mapbox.com/styles/v1/evgeshadrozdova/cjf8em7uq3qwq2rpbdrtpvda6/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ', {
-            //     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            // }).addTo(map);
 
+        
 
-            });
+map.on('click', function(e) {
+        map.setView(e.latlng, 7);
+});
 
 
 

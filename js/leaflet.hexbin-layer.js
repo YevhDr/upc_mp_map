@@ -5,8 +5,8 @@ L.HexLayer = L.Class.extend({
     includes: L.Mixin.Events,
 
     options: {
-        minZoom: 0,
-        maxZoom: 18,
+        minZoom: 6,
+        maxZoom: 7,
         padding: 100,
         radius: 8
     },
