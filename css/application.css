@@ -437,10 +437,61 @@ table {
 
 .leaflet-map {
   margin: 50px 0 50px 0; }
+  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px), (max-width: 1024px) {
+    .leaflet-map {
+      display: block; } }
+  @media (max-width: 767px) {
+    .leaflet-map {
+      display: none; } }
 
-#quake {
+@media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px), (max-width: 1024px) {
+  .leaflet-mob-map {
+    display: none; } }
+@media (max-width: 767px) {
+  .leaflet-mob-map {
+    display: block; } }
+
+#desktop-map {
   height: 90vh;
   background-color: white; }
+
+#mob-map {
+  background-color: white;
+  height: 60vh;
+  /*Portrait*/
+  /* ----------- Galaxy S4, S5 and Note 3 ----------- */
+  /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+  /* ----------- iPhone 6+, 7+ and 8+ ----------- */
+  /* ----------- iPhone X ----------- */
+  /*Landscape*/
+  /* ----------- Galaxy S4, S5 and Note 3 ----------- */
+  /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+  /* ----------- iPhone 6+, 7+ and 8+ ----------- */
+  /* ----------- iPhone X ----------- */ }
+  @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+    #mob-map {
+      height: 60vh; } }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    #mob-map {
+      height: 60vh; } }
+  @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+    #mob-map {
+      height: 60vh; } }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+    #mob-map {
+      height: 60vh; } }
+  @media screen and (device-width: 320px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape) {
+    #mob-map {
+      height: 100vh; } }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    #mob-map {
+      height: 100vh; } }
+  @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {
+    #mob-map {
+      height: 100vh; } }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {
+    #mob-map {
+      height: 100vh; } }
 
 .hexagon {
   opacity: 0.7; }
@@ -493,12 +544,12 @@ table {
   /*border-top: 10px solid #fff;*/
   box-shadow: none; }
 
-#quake > div.leaflet-control-container >
-div.leaflet-bottom.leaflet-right >
+#desktop-map >
+div.leaflet-control-container > div.leaflet-bottom.leaflet-right >
 div.leaflet-control-minimap.leaflet-container.leaflet-fade-anim.leaflet-control >
-div.leaflet-map-pane >
-div.leaflet-objects-pane > div.leaflet-overlay-pane > svg > g:nth-child(1) > path {
-  fill: none; }
+div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-overlay-pane >
+svg > g:nth-child(1) > path {
+  fill: none !important; }
 
 .leaflet-control-zoom-out, .leaflet-control-zoom-in {
   background-color: #aaa !important; }

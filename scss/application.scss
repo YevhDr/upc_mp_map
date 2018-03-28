@@ -202,120 +202,237 @@ table {
 
 .leaflet-map {
   margin: 50px 0 50px 0;
-}
-
-#quake {
-  height: 90vh;
-  background-color: white;
-}
-
-.hexagon {
-  opacity: 0.7
-}
-
-.leaflet-container {
-  cursor: pointer!important;
-}
-
-.leaflet-popup-content-wrapper, .map-legends, .map-tooltip {
-  background: none!important;
-  border-radius: 3px;
-  box-shadow: none;
-}
-
-.custom-popup .leaflet-popup-content-wrapper a {
-  color:rgba(255,255,255,0.1);
-}
-.custom-popup .leaflet-popup-tip-container {
-  width:20px;
-  height:15px;
-}
-.custom-popup .leaflet-popup-tip {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-/* remove popup triangle*/
-.leaflet-popup-tip {
-  border: 0;
-}
-
-/* create new popup background for zoom-7*/
-.custom {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
-  line-height: 14px;
-}
-
-.leaflet-container p {
-  text-align: right;
-  color: #59595C;
-  //color: white;
-  font-size: 13px;
-  line-height: 15px;
-  margin-right: 5px;
-  /*font-weight: 800;*/
-  /*font-style: italic;*/
-}
-
-.leaflet-popup-tip-container {
-  width: 0;
-  height: 0;
-  margin: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  /*border-top: 10px solid #fff;*/
-  box-shadow: none;
-}
-
-#quake > div.leaflet-control-container >
-div.leaflet-bottom.leaflet-right >
-div.leaflet-control-minimap.leaflet-container.leaflet-fade-anim.leaflet-control >
-div.leaflet-map-pane >
-div.leaflet-objects-pane > div.leaflet-overlay-pane > svg > g:nth-child(1) > path
-{
-  fill:none;
-}
-
-
-.leaflet-control-zoom-out, .leaflet-control-zoom-in {
-  background-color: #aaa!important;
-}
-
-
-//dynamic annotation to map
-.description {
-
   @media #{$brk-xlarge},
   #{$brk-large},
-  #{$brk-medium}  {
-    width:10%;
-    margin-left: 80%;
-    margin-top:20px;
-    font-size: 13px !important;
-    line-height: 16px;
-    //font-weight: 800;
-    position:absolute;
-    top:0;
-    left:20px;
-    text-align: right;
+  #{$brk-medium},
+  #{$brk-narrow}   {
+    display: block;
+
   }
-  @media #{$brk-narrow},
-  #{$brk-spnarrow}{
-    position: relative;
-    width:90%;
-    margin: 10px auto;
-    font-size: 10px !important;
-    line-height: 12px;
-    text-align: left;
+  @media #{$brk-spnarrow} {
+    display: none;
   }
 }
 
-.description2 {
-  width:90%;
-  margin: 5% auto;
+.leaflet-mob-map {
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium},
+  #{$brk-narrow}  {
+    display: none;
+
+  }
+  @media #{$brk-spnarrow}{
+    display: block;
+  }
 }
+
+  #desktop-map {
+    height: 90vh;
+    background-color: white;
+  }
+
+  #mob-map {
+    background-color: white;
+    height: 60vh;
+    /*Portrait*/
+    /* ----------- Galaxy S4, S5 and Note 3 ----------- */
+    @media screen
+    and (device-width: 320px)
+    and (device-height: 640px)
+    and (-webkit-device-pixel-ratio: 3)
+    and (orientation: portrait) {
+      height: 60vh;
+    }
+    /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+    @media only screen
+    and (min-device-width: 375px)
+    and (max-device-width: 667px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (orientation: portrait) {
+      height: 60vh;
+    }
+
+    /* ----------- iPhone 6+, 7+ and 8+ ----------- */
+    @media only screen
+    and (min-device-width: 414px)
+    and (max-device-width: 736px)
+    and (-webkit-min-device-pixel-ratio: 3)
+    and (orientation: portrait) {
+      height: 60vh;
+    }
+
+    /* ----------- iPhone X ----------- */
+    @media only screen
+    and (min-device-width: 375px)
+    and (max-device-width: 812px)
+    and (-webkit-min-device-pixel-ratio: 3)
+    and (orientation: portrait) {
+      height: 60vh;
+    }
+    ///* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+    //@media only screen
+    //and (min-device-width: 768px)
+    //and (max-device-width: 1024px)
+    //and (orientation: portrait)
+    //and (-webkit-min-device-pixel-ratio: 2) {
+    //  height: 60vh;
+    //}
+
+
+    /*Landscape*/
+    /* ----------- Galaxy S4, S5 and Note 3 ----------- */
+    @media screen
+    and (device-width: 320px)
+    and (device-height: 640px)
+    and (-webkit-device-pixel-ratio: 3)
+    and (orientation: landscape) {
+      height: 100vh;
+    }
+    /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+    @media only screen
+    and (min-device-width: 375px)
+    and (max-device-width: 667px)
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (orientation: landscape) {
+      height: 100vh;
+    }
+    /* ----------- iPhone 6+, 7+ and 8+ ----------- */
+    @media only screen
+    and (min-device-width: 414px)
+    and (max-device-width: 736px)
+    and (-webkit-min-device-pixel-ratio: 3)
+    and (orientation: landscape) {
+      height: 100vh;
+    }
+    /* ----------- iPhone X ----------- */
+    @media only screen
+    and (min-device-width: 375px)
+    and (max-device-width: 812px)
+    and (-webkit-min-device-pixel-ratio: 3)
+    and (orientation: landscape) {
+      height: 100vh;
+    }
+    ///* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+    //@media only screen
+    //and (min-device-width: 768px)
+    //and (max-device-width: 1024px)
+    //and (orientation: landscape)
+    //and (-webkit-min-device-pixel-ratio: 2) {
+    //  height: 100vh;
+    //}
+
+  }
+
+
+  .hexagon {
+    opacity: 0.7
+  }
+
+  .leaflet-container {
+    cursor: pointer!important;
+  }
+
+  .leaflet-popup-content-wrapper, .map-legends, .map-tooltip {
+    background: none!important;
+    border-radius: 3px;
+    box-shadow: none;
+  }
+
+  .custom-popup .leaflet-popup-content-wrapper a {
+    color:rgba(255,255,255,0.1);
+  }
+  .custom-popup .leaflet-popup-tip-container {
+    width:20px;
+    height:15px;
+  }
+  .custom-popup .leaflet-popup-tip {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* remove popup triangle*/
+  .leaflet-popup-tip {
+    border: 0;
+  }
+
+  /* create new popup background for zoom-7*/
+  .custom {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    line-height: 14px;
+  }
+
+  .leaflet-container p {
+    text-align: right;
+    color: #59595C;
+    //color: white;
+    font-size: 13px;
+    line-height: 15px;
+    margin-right: 5px;
+    /*font-weight: 800;*/
+    /*font-style: italic;*/
+  }
+
+  .leaflet-popup-tip-container {
+    width: 0;
+    height: 0;
+    margin: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    /*border-top: 10px solid #fff;*/
+    box-shadow: none;
+  }
+
+#desktop-map >
+div.leaflet-control-container > div.leaflet-bottom.leaflet-right >
+div.leaflet-control-minimap.leaflet-container.leaflet-fade-anim.leaflet-control >
+div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-overlay-pane >
+svg > g:nth-child(1) > path
+  {
+    fill:none!important;
+  }
+
+
+  .leaflet-control-zoom-out, .leaflet-control-zoom-in {
+    background-color: #aaa!important;
+  }
+
+
+  //dynamic annotation to map
+  .description {
+
+    @media #{$brk-xlarge},
+    #{$brk-large},
+    #{$brk-medium}  {
+      width:10%;
+      margin-left: 80%;
+      margin-top:20px;
+      font-size: 13px !important;
+      line-height: 16px;
+      //font-weight: 800;
+      position:absolute;
+      top:0;
+      left:20px;
+      text-align: right;
+    }
+    @media #{$brk-narrow},
+    #{$brk-spnarrow}{
+      position: relative;
+      width:90%;
+      margin: 10px auto;
+      font-size: 10px !important;
+      line-height: 12px;
+      text-align: left;
+    }
+  }
+
+  .description2 {
+    width:90%;
+    margin: 5% auto;
+  }
+
 
 
 

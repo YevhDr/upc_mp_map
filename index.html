@@ -184,12 +184,17 @@
     </div>
     <div class="row">
         <div class="col-md-12 leaflet-map">
-            <div id='quake'></div> <!--map container-->
+            <div id='desktop-map'></div> <!--map container-->
             <p class="description">клікніть на карту, аби збільшити масштаб і побачити деталі</p>
             <p class="description2">На мапі відсутні 162 релігійних громади, адреси яких не вдалось розпізнати сервісам геокодування Google</p>
-
-
         </div>
+
+        <div class="col-md-12 leaflet-mob-map">
+            <div id='mob-map'></div> <!--map container-->
+            <p class="description">клікніть на карту, аби збільшити масштаб і побачити деталі</p>
+            <p class="description2">На мапі відсутні 162 релігійних громади, адреси яких не вдалось розпізнати сервісам геокодування Google</p>
+        </div>
+
 
     </div>
 
@@ -331,6 +336,7 @@
 <script type="text/javascript" src="js/colorbrewer.js"></script>
 <script type="text/javascript" src="js/leaflet.hexbin-layer.js"></script>
 <script type="text/javascript" src="js/hex-map.js"></script>
+<script type="text/javascript" src="js/hex-mob-map.js"></script>
 
 
 <script>

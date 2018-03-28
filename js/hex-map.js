@@ -1,27 +1,14 @@
 /* ----- HEXAGON'S CODE -----*/
 (function () {
 
-
-    // function setInitialMapZoom() {
-    //     var viewportWidth = window.innerWidth;
-    //     var mapZoom;
-    //     if (viewportWidth < 1028) {
-    //         mapZoom = 4;
-    //     }  else if (viewportWidth >= 1028) {
-    //         mapZoom = 6;
-    //     }
-    //     return mapZoom;
-    // }
-
-
     var max, scale,
         osmAttrib = 'Map data &copy; OpenStreetMap contributors',
         classes = 9,
         scheme = colorbrewer["YlOrRd"][classes],
-        container = L.DomUtil.get('quake'),
+        container = L.DomUtil.get('desktop-map'),
         map = L.map(container, {
             zoomControl: false,
-            attribution: osmAttrib,
+            attributionControl: osmAttrib,
             center: [49, 32],
             zoom: 6
         });
@@ -30,11 +17,7 @@
         position:'topright'
     }).addTo(map);
 
-    // var pointsLayer = L.layerGroup();
 
-
-    // Async call for data. Source URL is loaded from container element's
-    // 'data-source' attribute.
     d3.csv('data/upc_mp_geocoded.csv', function (error, coffee) {
         var zoomLevel = map.getZoom();
         console.log(zoomLevel);
@@ -61,7 +44,10 @@
 
 
         var hex = L.hexLayer(collection, {
-            applyStyle: hex_style
+            applyStyle: hex_style,
+            minZoom: 6,
+            maxZoom: 8,
+            radius: 9
         });
         //
         map.addLayer(hex);
@@ -95,10 +81,10 @@
             //     .append('p')
             //     .html('show when zoom');
 
-            var poppUp = $('#quake > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div');
+            var poppUp = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div');
             var hexagons = $('path.hexagon');
-            var bigCircle = $('#quake > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-overlay-pane > svg.leaflet-zoom-animated > g:nth-child(1) > path');
-            var tooltip = $('#quake > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p');
+            var bigCircle = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-overlay-pane > svg.leaflet-zoom-animated > g:nth-child(1) > path');
+            var tooltip = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p');
             var popupBackgroundColor = $('.custom-popup');
             var description = $('p.description');
 
@@ -129,7 +115,7 @@
                     tooltip.css('display', 'none', 'important');
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
-                    description.html('одна точка позначає одну громаду, аби подивитись назву ы адресу громади, натисність на неї');
+                    description.html('одна точка позначає одну громаду, аби подивитись назву і адресу громади, натисність на неї');
                     break;
 
 
@@ -142,28 +128,10 @@
 
 
 // add minimap
-
-        window.addEventListener('resize', function(event){
-            // get the width of the screen after the resize event
-            var width = document.documentElement.clientWidth;
-            // tablets are between 768 and 922 pixels wide
-            // phones are less than 768 pixels wide
-            if (width > 1024) {
-                var osmUrl = 'https://api.mapbox.com/styles/v1/evgeshadrozdova/cjfaw65ou7as82rp9ebb43532/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ';
-                var osmAttrib = 'Map data &copy; OpenStreetMap contributors';
-                var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 8, attribution: osmAttrib});
-                var miniMap = new L.Control.MiniMap(osm).addTo(map);
-            }  else {
-                return false
-            }
-        });
-        // var osmUrl = 'https://api.mapbox.com/styles/v1/evgeshadrozdova/cjfaw65ou7as82rp9ebb43532/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ';
-        // var osmAttrib = 'Map data &copy; OpenStreetMap contributors';
-        // var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 8, attribution: osmAttrib});
-        // var miniMap = new L.Control.MiniMap(osm).addTo(map);
-
-
-
+        var osmUrl = 'https://api.mapbox.com/styles/v1/evgeshadrozdova/cjfaw65ou7as82rp9ebb43532/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZXZnZXNoYWRyb3pkb3ZhIiwiYSI6ImNqMjZuaGpkYTAwMXAzMm5zdGVvZ2c0OHYifQ.s8MMs2wW15ZyUfDhTS_cdQ';
+        var osmAttrib = 'Map data &copy; OpenStreetMap contributors';
+        var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 8, attribution: osmAttrib});
+        var miniMap = new L.Control.MiniMap(osm).addTo(map);
 
 
 // add circles
@@ -211,6 +179,8 @@
             map.scrollWheelZoom.disable();
         }
 
+        $('.leaflet-control-attribution').hide()
+
     });
 
     /**
@@ -228,7 +198,7 @@
                 return d.length;
             });
             scale = d3.scale.quantize()
-                .domain([0, 45])
+                .domain([0, 70])
                 .range(d3.range(classes));
         }
 
