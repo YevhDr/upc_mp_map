@@ -1,14 +1,14 @@
 /**
  * Created by yevheniia on 27.03.18.
  */
+
 L.HexLayer = L.Class.extend({
     includes: L.Mixin.Events,
-
     options: {
         minZoom: 6,
-        maxZoom: 7,
+        maxZoom: 8,
         padding: 100,
-        radius: 8
+        radius: 10
     },
 
     initialize: function (data, options) {

@@ -5,20 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Московський патріархат</title>
 
+
+
+
+
+
+
+
+
+
+
+
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Andika&amp;subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+
+    <!-- Local and Inner links -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+    <link rel="stylesheet" href="css/leaflet-0-7.css"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href='css/MarkerCluster.css' rel='stylesheet'/>
+    <!--<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />-->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css' rel='stylesheet'/>
+    <link rel="stylesheet" href="css/application.css"/>
+
+
+    <!-- Scripts -->
     <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/d3.min.js"></script>
+    <!--<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>-->
+    <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet-src.js"></script>
+    <!--<script src="lib/leaflet-src-0-7.js"></script>-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js'></script>
+    <script src='lib/leaflet.markercluster.js'></script>
 
+
+    <!--<script src="http://projects.delimited.io/experiments/hexbins/lib/simple_statistics.js"></script>-->
+    <script src="lib/bootstrap.min.js"></script>
+    <script src='lib/share-behavior.js'></script>
 
     <!--Libraries styles-->
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700" rel="stylesheet">
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css' rel='stylesheet' />
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/application.css"/>
+
+
 </head>
 
 <body>
@@ -66,14 +98,12 @@
 </div>
 
 
-
 <div class="container-fluid  last-div">
     <div class="row">
         <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 paragraph">
 
             <p><span>Згідно з Законом “Про свободу совісті та релігійні організації”, релігійна громада — це місцева релігійна організація віруючих громадян, які добровільно об'єдналися з метою спільного задоволення релігійних потреб. Для реєстрації релігійної організації необхідно щонайменше 10 осіб. Громада не зобовʼязана повідомляти державу про утворення, проте реєстрація (набуття статусу юридичної особи) необхідна, якщо вона планує володіти майном, підписувати угоди. На загальних зборах громади ухвалюють рішення про обрання керівника. Часто керівниками релігійних громад є священики, але це не обовʼязково. </span>
             </p>
-
 
 
             <h2>Бізнес, бокс, народні дружини</h2>
@@ -154,17 +184,15 @@
     </div>
     <div class="row">
         <div class="col-md-12 leaflet-map">
-            <div id='quake'></div>
-            <p class="description" style="text-align: left;">Клікніть на мапу, аби побачити деталі. <br/> На мапі відсутні 162 релігійних громади, адреси яких не вдалось
-                розпізнати сервісам геокодування Google</p>
-            <!--<div class='custom-popup' id='map'></div>-->
-            <p class="description" style="text-align: right;"></p>
-            <!--<div id="bubbles"></div>-->
+            <div id='quake'></div> <!--map container-->
+            <p class="description">клікніть на карту, аби збільшити масштаб і побачити деталі</p>
+            <p class="description2">На мапі відсутні 162 релігійних громади, адреси яких не вдалось розпізнати сервісам геокодування Google</p>
+
+
         </div>
 
     </div>
 
-    <!--<div id='mymap'></div>-->
 
     <div class="row">
         <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6  paragraph">
@@ -205,7 +233,6 @@
 
 
 </div>
-
 
 
 <!--<div class="container-fluid last-div">-->
@@ -300,14 +327,7 @@
 <!--<script src="lib/leaflet.js"></script>-->
 <!--<script src="lib/leaflet-src.js"></script>-->
 
-<script src="lib/d3.min.js"></script>
-<script src="lib/d3.tip.v0.6.3.js"></script>
-<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js'></script>
-<script src="lib/bootstrap.min.js"></script>
-<script src='lib/share-behavior.js'></script>
-<script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
-<script src="http://projects.delimited.io/experiments/hexbins/lib/simple_statistics.js"></script>
+
 <script type="text/javascript" src="js/colorbrewer.js"></script>
 <script type="text/javascript" src="js/leaflet.hexbin-layer.js"></script>
 <script type="text/javascript" src="js/hex-map.js"></script>
@@ -321,7 +341,6 @@
         }
     });
 </script>
-
 
 
 <script type="text/javascript">

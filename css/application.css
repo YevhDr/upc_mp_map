@@ -385,6 +385,7 @@ h2 {
 
 h3 {
   margin-top: 50px !important;
+  margin-bottom: 50px !important;
   font-size: 1.5rem !important;
   line-height: 2.7rem !important;
   font-weight: 800 !important;
@@ -419,13 +420,6 @@ text:active, text:focus {
   fill: #FAA61A;
   outline: none; }
 
-.description {
-  font-size: calc(16px * 0.5vw) !important;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
 table {
   margin-top: 40px; }
 
@@ -445,7 +439,7 @@ table {
   margin: 50px 0 50px 0; }
 
 #quake {
-  height: 50vw;
+  height: 90vh;
   background-color: white; }
 
 .hexagon {
@@ -505,5 +499,32 @@ div.leaflet-control-minimap.leaflet-container.leaflet-fade-anim.leaflet-control 
 div.leaflet-map-pane >
 div.leaflet-objects-pane > div.leaflet-overlay-pane > svg > g:nth-child(1) > path {
   fill: none; }
+
+.leaflet-control-zoom-out, .leaflet-control-zoom-in {
+  background-color: #aaa !important; }
+
+@media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
+  .description {
+    width: 10%;
+    margin-left: 80%;
+    margin-top: 20px;
+    font-size: 13px !important;
+    line-height: 16px;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    text-align: right; } }
+@media (max-width: 1024px), (max-width: 767px) {
+  .description {
+    position: relative;
+    width: 90%;
+    margin: 10px auto;
+    font-size: 10px !important;
+    line-height: 12px;
+    text-align: left; } }
+
+.description2 {
+  width: 90%;
+  margin: 5% auto; }
 
 /*# sourceMappingURL=application.css.map */
