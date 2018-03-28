@@ -499,7 +499,11 @@ table {
   /*border-top: 10px solid #fff;*/
   box-shadow: none; }
 
-#quake > div.leaflet-control-container > div.leaflet-bottom.leaflet-right > div.leaflet-control-minimap.leaflet-container.leaflet-retina.leaflet-fade-anim.leaflet-control > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-overlay-pane > svg > g:nth-child(1) > path {
+#quake > div.leaflet-control-container >
+div.leaflet-bottom.leaflet-right >
+div.leaflet-control-minimap.leaflet-container.leaflet-fade-anim.leaflet-control >
+div.leaflet-map-pane >
+div.leaflet-objects-pane > div.leaflet-overlay-pane > svg > g:nth-child(1) > path {
   fill: none; }
 
 /*# sourceMappingURL=application.css.map */
