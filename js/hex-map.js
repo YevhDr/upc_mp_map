@@ -99,7 +99,7 @@
                     tooltip.css('display', 'none');
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
-                    description.html('громади УПЦ МП сгруповані за місцем розташування, збільшість карту ще трошки');
+                    description.html('громади УПЦ МП сгруповані за місцем розташування, збільшіть карту ще трошки');
                     break;
                 case 8:
                     hexagons.css('display', 'none', 'important');
