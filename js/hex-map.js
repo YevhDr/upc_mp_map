@@ -90,7 +90,7 @@
                     tooltip.css('font-size', 13, 'important');
                     tooltip.css('line-height', '15px', 'important');
                     bigCircle.css('display', 'block', 'important');
-                    description.html('клікніть на карту, аби збільшити масштаб і побачити деталі');
+                    description.html('для масштабування карти використовуйте "плюс" і "мінус" або клік');
                     break;
                 case 7:
                     hexagons.css('display', 'block', 'important');
@@ -107,7 +107,7 @@
                     tooltip.css('display', 'none');
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
-                    description.html('одна точка позначає одну громаду, аби подивитись назву і адресу громади, натисність на позначку');
+                    description.html('точки клікабельні; щоб повернутись до попереднього масштабу, тисніть "мінус"');
                     break;
 
 
@@ -193,3 +193,32 @@
     }
 }());
 
+var innerHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var innerWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+
+
+var div = d3.select("#arrow");
+
+var svg = div.append('svg')
+    .attr("id", "arrow-svg")
+    .attr("width", innerWidth)
+    .attr("height", 50)
+    .attr("bottom", 0)
+    .attr("right", 0);
+
+svg.append("line")
+    .style("stroke", "black")
+    .attr("x1", innerWidth - 60)
+    .attr("y1", 2)
+    .attr("x2", innerWidth - 50)
+    .attr("y2", 11);
+
+svg.append("line")
+    .style("stroke", "black")
+    .attr("x1", innerWidth - 60)
+    .attr("y1", 21)
+    .attr("x2", innerWidth - 50)
+    .attr("y2", 11);
+
+d3.select('#arrow-svg').insert(type, "before");

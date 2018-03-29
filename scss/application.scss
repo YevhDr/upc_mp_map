@@ -98,24 +98,30 @@ h1 {
   text-align: left!important;
   font-weight: 800!important;
   color:$white!important;
-  @media #{$brk-xlarge},
-  #{$brk-large},
+  @media #{$brk-xlarge} {
+    margin-top:10vh!important;
+    font-size: 4vw!important;
+    line-height: 5vw!important;
+
+  }
+  @media#{$brk-large},
   #{$brk-medium}  {
     margin-top:10vh!important;
-    font-size: 5vw!important;
-    line-height: 5.5vw!important;
+    font-size: 4.5vw!important;
+    line-height: 5.0vw!important;
   }
   @media #{$brk-narrow} {
     margin-top:15vh!important;
-    font-size: 5vw!important;
+    font-size: 4vw!important;
     line-height: 5vw!important;
   }
   @media #{$brk-spnarrow} {
-    margin-top: 20vh!important;
+    margin-top: 15vh!important;
     font-size: 8vw!important;
     line-height: 9vw!important;
   }
 }
+
 
 h2 {
   text-align: left!important;
@@ -412,8 +418,9 @@ svg > g:nth-child(1) > path
     @media #{$brk-xlarge},
     #{$brk-large},
     #{$brk-medium}  {
-      width:10%;
-      margin-left: 80%;
+      width:20%;
+      margin-left: 70%;
+      margin-right:70px;
       margin-top:20px;
       font-size: 13px !important;
       line-height: 16px;
@@ -441,7 +448,24 @@ svg > g:nth-child(1) > path
 
   }
 
-
+#arrow-svg {
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    margin-top:20px;
+    font-size: 13px !important;
+    line-height: 16px;
+    //font-weight: 800;
+    position:absolute;
+    top:0;
+    right:20px;
+    text-align: right;
+  }
+  @media #{$brk-narrow},
+  #{$brk-spnarrow}{
+    dіsplay:block;
+  }
+}
 
 
 

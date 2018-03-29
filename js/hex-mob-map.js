@@ -107,12 +107,14 @@
                     tooltip.css('font-size', 13, 'important');
                     tooltip.css('line-height', '15px', 'important');
                     bigCircle.css('display', 'block', 'important');
+                    description.html('для масштабування карти використовуйте "+" і "-" або клік');
                     break;
                 case 6:
                     mobmap.addLayer(markers);
                     hexagons.css('display', 'block', 'important');
                     bigCircle.css('display', 'none', 'important');
                     tooltip.css('display', 'none', 'important');
+                    description.html('аби повернутись до попереднього масштабу, тисніть "-"');
                     break;
                 case 7:
                     hexagons.css('display', 'none', 'important');

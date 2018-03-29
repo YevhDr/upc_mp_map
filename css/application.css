@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   position: relative;
   min-height: 100%; }
@@ -360,19 +361,24 @@ h1 {
   text-align: left !important;
   font-weight: 800 !important;
   color: #fff !important; }
-  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
+  @media (max-width: 2570px) {
     h1 {
       margin-top: 10vh !important;
-      font-size: 5vw !important;
-      line-height: 5.5vw !important; } }
+      font-size: 4vw !important;
+      line-height: 5vw !important; } }
+  @media (max-width: 1440px), (max-width: 1285px) {
+    h1 {
+      margin-top: 10vh !important;
+      font-size: 4.5vw !important;
+      line-height: 5vw !important; } }
   @media (max-width: 1024px) {
     h1 {
       margin-top: 15vh !important;
-      font-size: 5vw !important;
+      font-size: 4vw !important;
       line-height: 5vw !important; } }
   @media (max-width: 767px) {
     h1 {
-      margin-top: 20vh !important;
+      margin-top: 15vh !important;
       font-size: 8vw !important;
       line-height: 9vw !important; } }
 
@@ -562,8 +568,9 @@ svg > g:nth-child(1) > path {
 
 @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
   .description {
-    width: 10%;
-    margin-left: 80%;
+    width: 20%;
+    margin-left: 70%;
+    margin-right: 70px;
     margin-top: 20px;
     font-size: 13px !important;
     line-height: 16px;
@@ -584,5 +591,18 @@ svg > g:nth-child(1) > path {
   width: 90%;
   margin: 5% auto;
   font-size: 10px !important; }
+
+@media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
+  #arrow-svg {
+    margin-top: 20px;
+    font-size: 13px !important;
+    line-height: 16px;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    text-align: right; } }
+@media (max-width: 1024px), (max-width: 767px) {
+  #arrow-svg {
+    dіsplay: block; } }
 
 /*# sourceMappingURL=application.css.map */
