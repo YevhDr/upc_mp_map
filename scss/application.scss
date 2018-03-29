@@ -159,6 +159,12 @@ p span {
   line-height: 1rem;
 }
 
+a.dashed {
+  color:$main-text!important;
+  border-bottom:1px dashed $main-text;
+
+}
+
 
 /*------ MAP ----- */
 

@@ -12,7 +12,6 @@ body {
   overflow-x: hidden; }
 
 a {
-  color: white !important;
   text-decoration: none; }
   a:link {
     text-decoration: none; }
@@ -118,6 +117,9 @@ li {
   @media (max-width: 1024px), (max-width: 767px) {
     .links {
       display: none; } }
+
+#footer-wraper > div > ul > li > a {
+  color: white; }
 
 .support-site:link,
 .support-site:visited {
@@ -405,6 +407,10 @@ h5 {
 p span {
   font-size: 1.3rem;
   line-height: 1rem; }
+
+a.dashed {
+  color: #383e47 !important;
+  border-bottom: 1px dashed #383e47; }
 
 /*------ MAP ----- */
 h2 {

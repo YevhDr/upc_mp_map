@@ -14,7 +14,6 @@ body {
 }
 
 a {
-  color: white!important;
   text-decoration: none;
   &:link {
     text-decoration: none;
@@ -29,25 +28,6 @@ a {
 }
 
 
-//h1 {
-//  @include text(3.5em, 1.8em, bold);
-//}
-//
-//h2 {
-//  @include text(2em, 2em, bold);
-//}
-//
-//h3 {
-//  @include text(1.8em, 2.2em, normal);
-//}
-//
-//p, a {
-//  @include text(1.3rem, 2rem);
-//}
-//
-//li a {
-//  @include text(1rem, 2rem);
-//}
 
 .last-div {
   margin-bottom: 300px;

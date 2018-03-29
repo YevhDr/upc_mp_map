@@ -66,6 +66,7 @@ ul {
 
 li {
   list-style: none;
+
 }
 
 .links {
@@ -80,6 +81,10 @@ li {
   #{$brk-spnarrow} {
     display: none;
   }
+}
+
+#footer-wraper > div > ul > li > a {
+  color:white;
 }
 
 
