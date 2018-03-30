@@ -72,6 +72,7 @@
 
 //on zoom
         map.on('zoomend', function () {
+            
             var zoomLevel = map.getZoom(); //get current zoom
             console.log(zoomLevel);
 
@@ -90,7 +91,12 @@
                     tooltip.css('font-size', 13, 'important');
                     tooltip.css('line-height', '15px', 'important');
                     bigCircle.css('display', 'block', 'important');
-                    description.html('для масштабування карти використовуйте "плюс", "мінус" або клік');
+                    description.html('для масштабування карти використовуйте "плюс" і "мінус"');
+                    map.on('click', function () {
+                        tooltip.css('display', 'block');
+                        tooltip.css('font-size', 13, 'important');
+                        tooltip.css('line-height', '15px', 'important');
+                    });
                     break;
                 case 7:
                     hexagons.css('display', 'block', 'important');
@@ -100,6 +106,7 @@
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
                     description.html('громади УПЦ МП сгруповані за місцем розташування, збільшіть карту ще трошки');
+
                     break;
                 case 8:
                     hexagons.css('display', 'none', 'important');
@@ -108,6 +115,10 @@
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
                     description.html('щоб повернутись до попереднього масштабу, тисніть "мінус"; клікніть на точку, аби побачити назву і адресу громади; ');
+                    map.on('click', function (e) {
+                        map.setView(e.latlng, 8);
+
+                    });
                     break;
 
 
@@ -152,9 +163,7 @@
             circle.addTo(markers);
         }
 
-        map.on('click', function (e) {
-        map.setView(e.latlng, 7);
-        });
+
 
         if (map.scrollWheelZoom) {
             map.scrollWheelZoom.disable();
