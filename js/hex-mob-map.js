@@ -3,8 +3,8 @@
 
     var max, scale,
         osmAttrib = 'Map data &copy; OpenStreetMap contributors',
-        classes = 9,
-        scheme = colorbrewer["YlOrRd"][classes],
+        classes = 6,
+        scheme = color["YlOrRd"][classes],
         container = L.DomUtil.get('mob-map'),
         mobmap = L.map(container, {
             zoomControl: false,
@@ -176,8 +176,8 @@
             max = d3.max(hexagons.data(), function (d) {
                 return d.length;
             });
-            scale = d3.scale.quantize()
-                .domain([0, 70])
+            scale = d3.scale.quantile()
+                .domain([0,5,11,20,36,67,165])
                 .range(d3.range(classes));
         }
 

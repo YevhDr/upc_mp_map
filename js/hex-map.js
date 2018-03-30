@@ -1,10 +1,10 @@
 /* ----- HEXAGON'S CODE -----*/
-(function () {
+(function () {   
 
     var max, scale,
         osmAttrib = 'Map data &copy; OpenStreetMap contributors',
-        classes = 9,
-        scheme = colorbrewer["YlOrRd"][classes],
+        classes = 6,
+        scheme = color["YlOrRd"][classes],
         container = L.DomUtil.get('desktop-map'),
         map = L.map(container, {
             zoomControl: false,
@@ -47,7 +47,7 @@
             applyStyle: hex_style,
             minZoom: 6,
             maxZoom: 8,
-            radius: 9
+            radius: 10
         });
         //
         map.addLayer(hex);
@@ -90,7 +90,7 @@
                     tooltip.css('font-size', 13, 'important');
                     tooltip.css('line-height', '15px', 'important');
                     bigCircle.css('display', 'block', 'important');
-                    description.html('для масштабування карти використовуйте "плюс" і "мінус" або клік');
+                    description.html('для масштабування карти використовуйте "плюс", "мінус" або клік');
                     break;
                 case 7:
                     hexagons.css('display', 'block', 'important');
@@ -178,28 +178,27 @@
             max = d3.max(hexagons.data(), function (d) {
                 return d.length;
             });
-            scale = d3.scale.quantize()
-                .domain([0, 70])
-                .range(d3.range(classes));
+            scale = d3.scale.quantile()
+                .domain([0,5,11,20,36,67,165])
+                .range(d3.range(classes));                
         }
 
         hexagons
-        // .attr("stroke", scheme[classes - 1])
+        
             .attr("stroke", "none")
             .attr("stroke-width", 2)
             .attr("fill", function (d) {
                 return scheme[scale(d.length)];
             });
     }
-}());
+}()); //end of hex
 
+
+
+// стрілочка-вказівка на масштабування
 var innerHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 var innerWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-
-
-
 var div = d3.select("#arrow");
-
 var svg = div.append('svg')
     .attr("id", "arrow-svg")
     .attr("width", innerWidth)
@@ -221,4 +220,3 @@ svg.append("line")
     .attr("x2", innerWidth - 50)
     .attr("y2", 11);
 
-d3.select('#arrow-svg').insert(type, "before");

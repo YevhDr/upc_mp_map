@@ -4,7 +4,7 @@ html {
   min-height: 100%; }
 
 body {
-  font-family: Open Sans, sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 100%;
   color: #383e47;
   width: 100%;
@@ -335,14 +335,31 @@ li {
       display: block; } }
 
 img.img {
-  width: 100%;
-  margin: 50px 0 50px 0; }
-  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
+  width: 100%; }
+  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px), (max-width: 1024px) {
     img.img {
-      display: block; } }
-  @media (max-width: 1024px), (max-width: 767px) {
+      margin: 50px 0 50px 60px; } }
+  @media (max-width: 767px) {
     img.img {
-      display: none; } }
+      margin: 50px 0 50px 10px; } }
+
+.img-capture {
+  margin-top: 60px !important; }
+  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px), (max-width: 1024px) {
+    .img-capture {
+      margin-left: 60px !important; } }
+  @media (max-width: 767px) {
+    .img-capture {
+      margin-left: 10px !important; } }
+
+.img-lead {
+  font-style: italic; }
+  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px), (max-width: 1024px) {
+    .img-lead {
+      margin-left: 60px; } }
+  @media (max-width: 767px) {
+    .img-lead {
+      margin-left: 10px; } }
 
 img.img-m {
   width: 100%;
@@ -387,17 +404,30 @@ h2 {
   font-size: 2rem !important;
   line-height: 2rem !important;
   font-weight: 700 !important;
-  margin-top: 30px !important;
-  margin-left: 0 !important;
+  margin-left: 0 !important; }
+
+.subtitle {
+  text-transform: uppercase;
+  margin-top: 60px !important;
   margin-bottom: 15px !important; }
 
 h3 {
   margin-top: 50px !important;
   margin-bottom: 50px !important;
-  font-size: 1.5rem !important;
-  line-height: 2.7rem !important;
   font-weight: 800 !important;
   text-align: left; }
+  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
+    h3 {
+      font-size: 18px;
+      line-height: 29px; } }
+  @media (max-width: 1024px) {
+    h3 {
+      font-size: 1.5rem !important;
+      line-height: 2.7rem !important; } }
+  @media (max-width: 767px) {
+    h3 {
+      font-size: 1.5rem !important;
+      line-height: 2.7rem !important; } }
 
 h5 {
   text-align: right;
@@ -405,10 +435,12 @@ h5 {
   color: #383e47 !important; }
 
 .paragraph {
-  font-size: 1.5rem;
-  line-height: 2.5rem;
   text-align: left;
   margin-bottom: 20px; }
+  @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
+    .paragraph {
+      font-size: 18px;
+      line-height: 29px; } }
 
 p span {
   font-size: 1.3rem;

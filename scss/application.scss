@@ -31,9 +31,6 @@
   and (orientation : landscape){
     height: 100vh;
   }
-
-
-
 }
 
 #inner-box {
@@ -63,16 +60,43 @@
 
 img.img {
   width:100%;
-  margin: 50px 0 50px 0;
 
   @media #{$brk-xlarge},
   #{$brk-large},
-  #{$brk-medium}  {
-    display:block;
+  #{$brk-medium},
+  #{$brk-narrow} {
+    margin: 50px 0 50px 60px;
   }
-  @media #{$brk-narrow},
-  #{$brk-spnarrow}{
-    display:none;
+  @media #{$brk-spnarrow}{
+    margin: 50px 0 50px 10px;
+  }
+
+}
+
+.img-capture {
+  margin-top: 60px!important;
+
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium},
+  #{$brk-narrow} {
+    margin-left: 60px!important;
+  }
+  @media #{$brk-spnarrow}{
+    margin-left: 10px!important;
+  }
+}
+
+.img-lead {
+  font-style:italic;
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium},
+  #{$brk-narrow} {
+    margin-left: 60px;
+  }
+  @media #{$brk-spnarrow}{
+    margin-left: 10px;
   }
 }
 
@@ -128,8 +152,13 @@ h2 {
   font-size: 2rem!important;
   line-height: 2rem!important;
   font-weight: 700!important;
-  margin-top: 30px!important;
   margin-left: 0!important;
+
+}
+
+.subtitle {
+  text-transform: uppercase;
+  margin-top: 60px!important;
   margin-bottom: 15px!important;
 
 }
@@ -137,11 +166,22 @@ h2 {
 h3 {
   margin-top: 50px!important;
   margin-bottom: 50px!important;
-  font-size: 1.5rem!important;
-  line-height: 2.7rem!important;
   font-weight: 800!important;
   text-align: left;
-  //background-color: #dfe0e2;
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    font-size: 18px;
+    line-height: 29px;
+  }
+  @media #{$brk-narrow} {
+    font-size: 1.5rem!important;
+    line-height: 2.7rem!important;
+  }
+  @media #{$brk-spnarrow} {
+    font-size: 1.5rem!important;
+    line-height: 2.7rem!important;
+  }
 }
 
 h5 {
@@ -151,10 +191,18 @@ h5 {
 }
 
 .paragraph {
-  font-size: 1.5rem;
-  line-height: 2.5rem;
   text-align:left;
   margin-bottom: 20px;
+
+  @media #{$brk-xlarge},
+  #{$brk-large},
+  #{$brk-medium}  {
+    font-size: 18px;
+    line-height: 29px;
+  }
+  @media #{$brk-narrow} {
+
+  }
   @media #{$brk-spnarrow} {
 
   }
