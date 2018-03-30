@@ -19,8 +19,6 @@
 
 
     d3.csv('data/upc_mp_geocoded.csv', function (error, upc) {
-        var zoomLevel = map.getZoom();
-        console.log(zoomLevel);
 
         function reformat(array) {
             var data = [];
@@ -70,18 +68,28 @@
             .setContent('<p class="changeSizeTip">Галичина<br/> - єдиний<br/>регіон,<br/>де майже<br/>немає<br/>УПЦ МП</p>')
             .openOn(map);
 
+//on click
+        var zoomLevel = map.getZoom(); //get current zoom
+
+
+        var poppUp = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div');
+        var hexagons = $('path.hexagon');
+        var bigCircle = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-overlay-pane > svg.leaflet-zoom-animated > g:nth-child(1) > path');
+        var tooltip = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p');
+        var popupBackgroundColor = $('.custom-popup');
+        var description = $('p.description');
+
+
+            map.on('click', function () {
+                    popup.openOn(map)
+
+        });
+
 //on zoom
         map.on('zoomend', function () {
             
             var zoomLevel = map.getZoom(); //get current zoom
             console.log(zoomLevel);
-
-            var poppUp = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div');
-            var hexagons = $('path.hexagon');
-            var bigCircle = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-overlay-pane > svg.leaflet-zoom-animated > g:nth-child(1) > path');
-            var tooltip = $('#desktop-map > div.leaflet-map-pane > div.leaflet-objects-pane > div.leaflet-popup-pane > div > div.leaflet-popup-content-wrapper > div > p');
-            var popupBackgroundColor = $('.custom-popup');
-            var description = $('p.description');
 
             switch (zoomLevel) {
                 case 6: //what to display when zoom is 6
@@ -92,10 +100,9 @@
                     tooltip.css('line-height', '15px', 'important');
                     bigCircle.css('display', 'block', 'important');
                     description.html('для масштабування карти використовуйте "плюс" і "мінус"');
-                    map.on('click', function () {
-                        tooltip.css('display', 'block');
-                        tooltip.css('font-size', 13, 'important');
-                        tooltip.css('line-height', '15px', 'important');
+                    map.on('click', function (e) {
+                        map.setView(e.latlng, 7);
+
                     });
                     break;
                 case 7:
@@ -106,7 +113,9 @@
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
                     description.html('громади УПЦ МП сгруповані за місцем розташування, збільшіть карту ще трошки');
-
+                    map.on('click', function (e) {
+                        map.setView(e.latlng, 7);
+                    });
                     break;
                 case 8:
                     hexagons.css('display', 'none', 'important');
@@ -125,6 +134,7 @@
                 default:
                     tooltip.css('font-size', 13, 'important');
                     tooltip.css('line-height', '15px', 'important');
+
             }
         });
 
