@@ -101,7 +101,7 @@
                     bigCircle.css('display', 'block', 'important');
                     description.html('для масштабування карти використовуйте "плюс" і "мінус"');
                     map.on('click', function (e) {
-                        map.setView(e.latlng, 7);
+                        map.setView(e.latlng, 6);
 
                     });
                     break;
@@ -123,7 +123,7 @@
                     tooltip.css('display', 'none');
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
-                    description.html('щоб повернутись до попереднього масштабу, тисніть "мінус"; клікніть на точку, аби побачити назву і адресу громади; ');
+                    description.html('щоб повернутись до попереднього масштабу, тисніть "мінус" <br/> клікніть на точку, аби побачити назву і адресу громади; ');
                     map.on('click', function (e) {
                         map.setView(e.latlng, 8);
 
