@@ -5,7 +5,7 @@
 @import "components/footer";
 @import "components/weirdo";
 
-
+/*---- header ---*/
 .jumbotron {
   padding-top:10px!important;
   background-color: $main-text !important;
@@ -58,6 +58,39 @@
   }
 }
 
+h1 {
+  font-family: 'Andika', sans-serif!important;
+  letter-spacing: 1px;
+  margin-left: 10%!important;
+  text-align: left!important;
+  font-weight: 800!important;
+  color:$white!important;
+  @media #{$brk-xlarge} {
+    margin-top:10vh!important;
+    font-size: 4vw!important;
+    line-height: 5vw!important;
+
+  }
+  @media#{$brk-large},
+  #{$brk-medium}  {
+    margin-top:10vh!important;
+    font-size: 4.5vw!important;
+    line-height: 5.0vw!important;
+  }
+  @media #{$brk-narrow} {
+    margin-top:15vh!important;
+    font-size: 4vw!important;
+    line-height: 5vw!important;
+  }
+  @media #{$brk-spnarrow} {
+    margin-top: 15vh!important;
+    font-size: 8vw!important;
+    line-height: 9vw!important;
+  }
+}
+
+/*---- images and graphics---*/
+
 img.img {
   width:100%;
 
@@ -100,52 +133,22 @@ img.img {
   }
 }
 
-img.img-m {
-  width:100%;
-  margin: 50px 0 50px 0;
-  @media #{$brk-xlarge},
-  #{$brk-large},
-  #{$brk-medium}  {
-    display:none;
-  }
-  @media #{$brk-narrow},
-  #{$brk-spnarrow}{
-    display:block;
-  }
-}
+//img.img-m {
+//  width:100%;
+//  margin: 50px 0 50px 0;
+//  @media #{$brk-xlarge},
+//  #{$brk-large},
+//  #{$brk-medium}  {
+//    display:none;
+//  }
+//  @media #{$brk-narrow},
+//  #{$brk-spnarrow}{
+//    display:block;
+//  }
+//}
 
 
-h1 {
-  font-family: 'Andika', sans-serif!important;
-  letter-spacing: 1px;
-  margin-left: 10%!important;
-  text-align: left!important;
-  font-weight: 800!important;
-  color:$white!important;
-  @media #{$brk-xlarge} {
-    margin-top:10vh!important;
-    font-size: 4vw!important;
-    line-height: 5vw!important;
-
-  }
-  @media#{$brk-large},
-  #{$brk-medium}  {
-    margin-top:10vh!important;
-    font-size: 4.5vw!important;
-    line-height: 5.0vw!important;
-  }
-  @media #{$brk-narrow} {
-    margin-top:15vh!important;
-    font-size: 4vw!important;
-    line-height: 5vw!important;
-  }
-  @media #{$brk-spnarrow} {
-    margin-top: 15vh!important;
-    font-size: 8vw!important;
-    line-height: 9vw!important;
-  }
-}
-
+/*---- text ---*/
 
 h2 {
   text-align: left!important;
@@ -156,7 +159,7 @@ h2 {
 
 }
 
-.subtitle {
+h2.subtitle {
   text-transform: uppercase;
   margin-top: 60px!important;
   margin-bottom: 15px!important;
@@ -223,43 +226,6 @@ a.dashed {
 /*------ MAP ----- */
 
 
-h2 {
-  font-size:1.5rem;
-  text-align: center;
-}
-
-.fa .fa-square {
-  color: #515661;
-}
-
-text:active, text:focus {
-  font-size: 1.3rem;
-  font-weight: 800;
-  fill: #FAA61A;
-  outline:none;
-}
-
-table {
-  margin-top:40px;
-}
-
-.margin {
-  margin-left: -10px;
-}
-
-
-#legend {
-  overflow: visible;
-}
-
-.legend {
-  font-size:1rem;
-}
-
-.flex-cont {
-  display:flex;
-}
-
 .leaflet-map {
   margin: 50px 0 50px 0;
   @media #{$brk-xlarge},
@@ -267,7 +233,6 @@ table {
   #{$brk-medium},
   #{$brk-narrow}   {
     display: block;
-
   }
   @media #{$brk-spnarrow} {
     display: none;
@@ -280,7 +245,6 @@ table {
   #{$brk-medium},
   #{$brk-narrow}  {
     display: none;
-
   }
   @media #{$brk-spnarrow}{
     display: block;
@@ -330,14 +294,6 @@ table {
     and (orientation: portrait) {
       height: 60vh;
     }
-    ///* ----------- iPad 3, 4 and Pro 9.7" ----------- */
-    //@media only screen
-    //and (min-device-width: 768px)
-    //and (max-device-width: 1024px)
-    //and (orientation: portrait)
-    //and (-webkit-min-device-pixel-ratio: 2) {
-    //  height: 60vh;
-    //}
 
 
     /*Landscape*/
@@ -373,20 +329,11 @@ table {
     and (orientation: landscape) {
       height: 100vh;
     }
-    ///* ----------- iPad 3, 4 and Pro 9.7" ----------- */
-    //@media only screen
-    //and (min-device-width: 768px)
-    //and (max-device-width: 1024px)
-    //and (orientation: landscape)
-    //and (-webkit-min-device-pixel-ratio: 2) {
-    //  height: 100vh;
-    //}
-
   }
 
 
   .hexagon {
-    opacity: 0.7
+    opacity: 0.8
   }
 
   .leaflet-container {
@@ -427,12 +374,10 @@ table {
   .leaflet-container p {
     text-align: right;
     color: #59595C;
-    //color: white;
     font-size: 13px;
     line-height: 15px;
     margin-right: 5px;
-    /*font-weight: 800;*/
-    /*font-style: italic;*/
+
   }
 
   .leaflet-popup-tip-container {
@@ -454,38 +399,54 @@ svg > g:nth-child(1) > path
     fill:none!important;
   }
 
-
   .leaflet-control-zoom-out, .leaflet-control-zoom-in {
     background-color: #aaa!important;
   }
 
 
-  //dynamic annotation to map
+  //dynamic map annotation at the top-right corner
   .description {
+    margin-top:20px;
+    font-size: 13px !important;
+    line-height: 16px;
+    position:absolute;
+    top:0;
+    left:20px;
+    text-align: right;
 
-    @media #{$brk-xlarge},
-    #{$brk-large},
-    #{$brk-medium}  {
+    @media #{$brk-xlarge} {
+      width:10%;
+      margin-left: 85%;
+      margin-right:70px;
+    }
+
+    @media #{$brk-large},
+    #{$brk-medium} {
       width:20%;
       margin-left: 70%;
       margin-right:70px;
-      margin-top:20px;
-      font-size: 13px !important;
-      line-height: 16px;
-      //font-weight: 800;
-      position:absolute;
-      top:0;
-      left:20px;
-      text-align: right;
     }
-    @media #{$brk-narrow},
-    #{$brk-spnarrow}{
-      position: relative;
-      width:90%;
-      margin: 10px auto;
-      font-size: 10px !important;
-      line-height: 12px;
-      text-align: left;
+    @media #{$brk-narrow} {
+      width:20%;
+      margin-left: 65%;
+      margin-right:70px;
+      margin-top:20px;
+    }
+    @media #{$brk-spnarrow}
+    and (-webkit-min-device-pixel-ratio: 2)
+    and (orientation: portrait){
+      width:40%;
+      margin-left: 40%;
+      margin-right:70px;
+    }
+
+    @media #{$brk-spnarrow}
+    and (-webkit-min-device-pixel-ratio: 3)
+    and (orientation: landscape){
+      width:30%;
+      margin-left: 55%;
+      margin-right:30px;
+      margin-top:20px;
     }
   }
 
@@ -493,7 +454,6 @@ svg > g:nth-child(1) > path
     width:90%;
     margin: 5% auto;
     font-size: 10px !important;
-
   }
 
 #arrow-svg {
@@ -503,15 +463,14 @@ svg > g:nth-child(1) > path
     margin-top:20px;
     font-size: 13px !important;
     line-height: 16px;
-    //font-weight: 800;
     position:absolute;
     top:0;
     right:20px;
     text-align: right;
   }
   @media #{$brk-narrow},
-  #{$brk-spnarrow}{
-    dіsplay:block;
+  #{$brk-spnarrow} {
+    display:block;
   }
 }
 

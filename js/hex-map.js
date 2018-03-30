@@ -107,7 +107,7 @@
                     tooltip.css('display', 'none');
                     popupBackgroundColor.css('background', 'white');
                     popupBackgroundColor.css('opacity', '0.8');
-                    description.html('точки клікабельні; щоб повернутись до попереднього масштабу, тисніть "мінус"');
+                    description.html('щоб повернутись до попереднього масштабу, тисніть "мінус"; клікніть на точку, аби побачити назву і адресу громади; ');
                     break;
 
 
@@ -209,14 +209,14 @@ var svg = div.append('svg')
 svg.append("line")
     .style("stroke", "black")
     .attr("x1", innerWidth - 60)
-    .attr("y1", 2)
+    .attr("y1", 12)
     .attr("x2", innerWidth - 50)
-    .attr("y2", 11);
+    .attr("y2", 22);
 
 svg.append("line")
     .style("stroke", "black")
     .attr("x1", innerWidth - 60)
-    .attr("y1", 21)
+    .attr("y1", 32)
     .attr("x2", innerWidth - 50)
-    .attr("y2", 11);
+    .attr("y2", 22);
 
