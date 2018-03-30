@@ -209,14 +209,14 @@ var svg = div.append('svg')
 svg.append("line")
     .style("stroke", "black")
     .attr("x1", innerWidth - 60)
-    .attr("y1", 12)
+    .attr("y1", 10)
     .attr("x2", innerWidth - 50)
-    .attr("y2", 22);
+    .attr("y2", 20);
 
 svg.append("line")
     .style("stroke", "black")
     .attr("x1", innerWidth - 60)
-    .attr("y1", 32)
+    .attr("y1", 30)
     .attr("x2", innerWidth - 50)
-    .attr("y2", 22);
+    .attr("y2", 20);
 
