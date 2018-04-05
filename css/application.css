@@ -602,7 +602,7 @@ svg > g:nth-child(1) > path {
 .description2 {
   width: 90%;
   margin: 5% auto;
-  font-size: 10px !important; }
+  font-size: 13px !important; }
 
 @media (max-width: 2570px), (max-width: 1440px), (max-width: 1285px) {
   #arrow-svg {
